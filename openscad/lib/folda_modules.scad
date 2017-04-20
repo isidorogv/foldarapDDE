@@ -199,3 +199,68 @@ module E3D_V6_head(){
 }
 
 
+module nemacollar(hg=5){
+    
+    difference(){
+
+        translate([-1,-1,0])cube([22,22,hg]);
+
+        translate([0,0,-2])cylinder(h=2*hg,r=15,$fn=150);
+        translate([15.5,15.5,-2])cylinder(h=2*hg,r=1.6,$fn=60);
+        translate([25.5,11.5,-2])rotate([0,0,45])cube([20,20,2*hg]);
+    }    
+}
+
+
+module nema17collar(h=5){
+    
+    nemacollar(hg=h);
+    mirror([1,0,0])nemacollar(hg=h);
+    mirror([0,1,0])nemacollar(hg=h);
+    mirror([1,1,0])nemacollar(hg=h);
+}
+
+
+module nema17drills(hg=5,dia=3){
+    
+    translate([15.5,15.5,-5])
+        cylinder(h=5*hg,r=(dia/2)+0.1,$fn=20*dia);
+    translate([-15.5,15.5,-5])
+        cylinder(h=5*hg,r=(dia/2)+0.1,$fn=20*dia);
+    translate([15.5,-15.5,-5])
+        cylinder(h=5*hg,r=(dia/2)+0.1,$fn=20*dia);
+    translate([-15.5,-15.5,-5])
+        cylinder(h=5*hg,r=(dia/2)+0.1,$fn=20*dia);    
+}
+
+
+module hotendhead(vinsert=true,filament=true,bcoupling=false){
+    
+    union(){
+        /*if (vinsert){
+            // The hotend head will be fixed to the extruder
+            // with a couple of M3 screws and inserted vertically
+            cylinder(h=15.25,r=8.15,$fn=50);
+        }
+        else{*/
+            // upper mount
+            translate([0,0,0])cylinder(h=5.5,r=8.15,$fn=50);
+            // neck
+            translate([0,0,5.1])cylinder(h=5.1,r=6.15,$fn=50);
+            // lower mount
+            translate([0,0,10.1])cylinder(h=5.5,r=8.15,$fn=50);
+            // This makes posible to carve a side slot
+            // in order to insert the hotend from a side,
+            // not vertically
+            /*translate([-8.15,0,0])cube([16.3,20,5.1]);
+            translate([-6.15,0,5])cube([12.3,20,5.1]);
+            translate([-8.15,0,10.1])cube([16.3,20,5.1]);
+        }*/
+        if (bcoupling){
+            cylinder(h=17.75,r=4,$fn=60);
+        }
+        // 1,75mm hole filament
+        if (filament)
+        translate([0,0,-10])cylinder(h=100,r=1.1,$fn=50);
+    }
+}

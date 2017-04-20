@@ -1,7 +1,4 @@
-
-include <lib/folda_modules.scad>;
-
-
+// Modules for for foldarap X axis 
 
 module x_motor_holder(){
 	difference(){
@@ -41,7 +38,7 @@ module x_motor_holder(){
 // pitch = distance between theeth; T2.5 = 2.5, GT2 = 2
 // wbelt = belt thickness
 // dejes = distance between smooth rods
-module x_carriage(pitch = 2.5, wbelt = 0.8, dejes=32){
+module x_carriage(pitch = 2, wbelt = 0.8, dejes=32){
 
 	// LM6UU bearing and smooth rod (lower)
 	%translate([0,8,9])rotate([0,90,0])cylinder(h=40, r=6.1, $fn=90);
@@ -59,12 +56,12 @@ module x_carriage(pitch = 2.5, wbelt = 0.8, dejes=32){
 				translate([-10,16.7-wbelt,4])cube([60,2,15]);
 				translate([-10,dejes+2,-5])cube([60,60,35]);
 			}
-			color("pink")for (i=[0:19]) {
+			color("pink")for (i=[0:15]) {
 		    	translate([0+pitch*i, 16.7, 3]) cube([1, 1.5, 12]);  
 			}
 			translate([40,dejes+16,0])rotate([0,0,180])
 				carriage_bearing_holder();
-			color("orange")translate([0,dejes+14.1,0])cube([40,5,15]);
+			color("orange")translate([0,dejes+14.1,0])cube([40,7,15]);
 		}
 		translate([0,dejes-32,0]){
 			// upper M3 screw holes
@@ -75,8 +72,8 @@ module x_carriage(pitch = 2.5, wbelt = 0.8, dejes=32){
 			translate([7.5,48.5,-3])cylinder(h=5, r=3.2, $fn=90);
 			translate([32.5,48.5,-3])cylinder(h=5, r=3.2, $fn=90);
 			// Some rounded corners
-			translate([35,46.1,-10])rounded_corner();
-			translate([5,46.1,-10])rotate([0,0,90])rounded_corner();
+			translate([35,48.1,-10])rounded_corner();
+			translate([5,48.1,-10])rotate([0,0,90])rounded_corner();
 			}
 		// lower M3 screw drills
 		// screw holes
@@ -88,83 +85,6 @@ module x_carriage(pitch = 2.5, wbelt = 0.8, dejes=32){
 	}
 }
 
-
-
-
-
-
-
-
-module hotend_holder_proform(h=9,hotend_footprint=true){
-
-	difference(){
-		translate([-NEMA17/2,0,-NEMA17/2])cube([NEMA17,h,NEMA17/2]);
-	
-		if (hotend_footprint)
-			translate([0,0.5,0])E3D_V6_head();
-		// fake Mk8 slotted piece
-		translate([-0.5,0,0.5])union(){
-			translate([0,14,0])rotate([90,0,0])
-				cylinder(h=15,r=5.05,$fn=70);
-			translate([-(NEMA17/2)-1,-1,-5.05])cube([(NEMA17/2)+1,15,6]);
-		}
-		// fake 623ZZ bearing, diameter=10mm
-		translate([9,0,0.5])union(){
-			translate([0,14,0])rotate([90,0,0])
-				cylinder(h=15,r=5.05,$fn=70);
-			translate([0,-1,-5.05])cube([(NEMA17/2)+1,15,6]);
-		}
-		// fixing screw drills
-		translate([-15.5,15,-15.5])rotate([90,0,0])
-			cylinder(h=30,r=1.6,$fn=50);
-		translate([15.5,15,-15.5])rotate([90,0,0])
-			cylinder(h=30,r=1.6,$fn=50);
-		// rounded corners
-		translate([(NEMA17/2)-5,20,-16])rotate([90,90,0])rounded_corner();
-		translate([-(NEMA17/2)+5,20,-16])rotate([90,180,0])rounded_corner();
-	}
-}
-
-
-// tk = thikness in mm
-module hotend_holder(tk=9){
-
-	difference(){
-		hotend_holder_proform(h=tk);
-
-		// stepper collar
-		translate([0,14,0])rotate([90,0,0])
-			cylinder(h=5,r=11.2,$fn=50);
-	}
-}
-
-
-// tk = thikness in mm
-module hotend_clamp(tk=9){
-
-	difference(){
-		hotend_holder_proform(h=tk);
-
-		// fixing screw heads
-		translate([-15.5,10,-15.5])rotate([90,0,0])
-			cylinder(h=6,r=3.1,$fn=50);
-		translate([15.5,10,-15.5])rotate([90,0,0])
-			cylinder(h=6,r=3.1,$fn=50);
-	}
-}
-
-
-
-module hotend_holder_base(){
-
-	difference(){
-		hotend_holder_proform(h=2,hotend_footprint=false);
-
-		// stepper collar
-		translate([0,5,0])rotate([90,0,0])
-			cylinder(h=10,r=11.2,$fn=50);
-	}
-}
 
 
 
@@ -181,7 +101,6 @@ module x_motor_idler(){
 
 
 }
-
 
 
 

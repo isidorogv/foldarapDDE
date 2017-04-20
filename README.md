@@ -10,7 +10,8 @@ Thankx to...
 
   * EnmanuelG (foldarap design)
   * ReprapPRO (x-carriage-1off.stl)
-  * [Francisco Malpartida](https://github.com/fmalpartida), SAV's electronics board author. 
+  * [Francisco Malpartida](https://github.com/fmalpartida), SAV's electronics board author.
+  * [rowokii](https://www.thingiverse.com/thing:767317), parametric universal spool holher.
   * [judetomate](https://www.thingiverse.com/thing:47752), spool holder idea.
 
 ...for their respective works.

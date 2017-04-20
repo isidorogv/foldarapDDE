@@ -11,11 +11,11 @@
 // -------------------------------------------------------------
 
 include <lib/folda_modules.scad>
+include <misc_foldarap.scad>
 include <X_foldarap_mod.scad>
 include <Y_foldarap_mod.scad>
 include <Z_foldarap_mod.scad>
 include <extruder_foldarap_mod.scad>
-include <misc_foldarap.scad>
 
 
 // ----- X axis -----
@@ -57,8 +57,15 @@ x_carriage(pitch=2);
 
 // ----- Extruder -----
 
-//rotate([-90,0,0])hotend_holder();
-//translate([0,30,0])rotate([-90,0,0])mirror()hotend_clamp();
+//extruder();
+//rotate([0,180,0])extruder(showmount=true);
+
+//translate([0,0,15])extruder_holder(erods=true);
+
+//mirror()idler();
+
+//fan_pipe();
+//rotate([90,0,0])fan_nozzle();
 
 //rotate([0,-90,0])e_fixing_chain_02();
 

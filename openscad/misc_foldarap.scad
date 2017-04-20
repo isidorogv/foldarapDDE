@@ -1,4 +1,21 @@
 
+
+// Auxiliar module, not directly used.
+module carriage_bearing_holder(){
+
+	difference(){
+		// old huxley carriage, by ReprapPRO team
+		import("aux/x-carriage-1off.stl");
+	
+		translate([-10,16.2,-4]) cube([60,60,25]);
+	}
+	// LM6UU bearing and smooth rod
+	%translate([0,8,9])rotate([0,90,0])cylinder(h=40, r=6.1, $fn=90);
+	%translate([-20,8,9])rotate([0,90,0])cylinder(h=80, r=3, $fn=90);
+}
+
+
+
 module orejeta(){
 	
 	hull(){
