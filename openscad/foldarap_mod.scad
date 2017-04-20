@@ -11,11 +11,11 @@
 // -------------------------------------------------------------
 
 include <lib/folda_modules.scad>
-include <misc_foldarap.scad>
-include <X_foldarap_mod.scad>
-include <Y_foldarap_mod.scad>
-include <Z_foldarap_mod.scad>
-include <extruder_foldarap_mod.scad>
+include <lib/misc_foldarap.scad>
+include <lib/X_foldarap_mod.scad>
+include <lib/Y_foldarap_mod.scad>
+include <lib/Z_foldarap_mod.scad>
+include <lib/extruder_foldarap_mod.scad>
 
 
 // ----- X axis -----
