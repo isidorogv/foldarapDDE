@@ -8,10 +8,10 @@ There are many versions of this fantastic 3D printer, but mine has a direct extr
 
 Thankx to...
 
-  * EnmanuelG (foldarap design)
-  * ReprapPRO (x-carriage-1off.stl)
+  * [EnmanuelG/OpenEdge](https://github.com/OpenEdge) (foldarap design)
+  * [ReprapPRO](https://reprappro.com/) (x-carriage-1off.stl)
   * [Francisco Malpartida](https://github.com/fmalpartida), SAV's electronics board author.
-  * [rowokii](https://www.thingiverse.com/thing:767317), parametric universal spool holher.
+  * [rowokii](https://www.thingiverse.com/thing:767317), parametric universal spool holder.
   * [judetomate](https://www.thingiverse.com/thing:47752), spool holder idea.
 
 ...for their respective works.

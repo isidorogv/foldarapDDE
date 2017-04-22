@@ -80,7 +80,6 @@ x_carriage(pitch=2);
 //translate([0,25,0])spool_holder_02();
 
 //knob_clamp(altura=10, radio=5, paso=30);
-//translate([30,0,0])spool_holder_clamp();
 
 //gantry_clamp();
 //translate([0,20,0])gantry_clamp();

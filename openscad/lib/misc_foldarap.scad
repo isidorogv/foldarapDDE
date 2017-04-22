@@ -1,6 +1,6 @@
 
 
-// Auxiliar module, not directly used.
+// Auxiliar modules, not directly used.
 module carriage_bearing_holder(){
 
 	difference(){
@@ -63,27 +63,6 @@ module spool_holder_clamp(altura=11, radio=10, paso=18, metrica=4){
 		translate([0,0,-3])cylinder(h=altura+10, r=metrica/2, $fn=100);
 	}
 }
-
-
-
-
-/*
-module asa_mod(){
-    
-    union(){
-        translate([25,0,0])difference(){
-            import("aux/addon-handle.stl");
-        
-            translate([-70,-25,-5])cube([40,30,60]);
-        }
-        translate([-25,0,0])difference(){
-            import("aux/addon-handle.stl");
-        
-            translate([30,-25,-5])cube([40,30,60]);
-        }
-    }
-}
-*/
 
 
 
