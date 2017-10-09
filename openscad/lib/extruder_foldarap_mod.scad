@@ -58,13 +58,13 @@ module extruder_holder(erods=false){
         translate([4.8,48,2])cube([5.5,10,3]);
         translate([29.8,48,2])cube([5.5,10,3]);
         // M3 nut holes for hotend
-        translate([7.5,41,20])rotate([0,0,0])union(){
+        translate([3,40,20])rotate([0,0,90])union(){
             translate([0,0,-5])cylinder(h=25,r=1.6,$fn=60);
             translate([])rotate([0,0,30])
                 cylinder(h=3,r=3.2,$fn=6);
             translate([-2.75,0,0])cube([5.5,20,3]);
         }
-        translate([23.5,41,20])rotate([0,0,0])union(){        
+        translate([36,40,20])rotate([0,0,-90])union(){        
             translate([0,0,-5])cylinder(h=25,r=1.6,$fn=60);
             translate([])rotate([0,0,30])
                 cylinder(h=3,r=3.2,$fn=6);
@@ -107,14 +107,14 @@ module extruder(showmount=false){
                 translate([10.5,83.95,35])rotate([0,0,180])
                     rounded_corner(rd=3);
                 translate([15.5,29.5,49])rotate([-90,180,0])
-                    hotendhead(vinsert=false,bcoupling=false);
+                    hotendhead();
                 translate([(NEMA17/2)-1,74,40])nema17drills();
                 translate([(NEMA17/2)-1,74,50])nema17drills(hg=3,dia=7);
                 // M3 nut holes for hotend
-                #translate([3,40,35])rotate([0,0,90])union(){
-                    translate([-2,-4.5,0])
+                #translate([3,42,35])rotate([0,0,90])union(){
+                    translate([-2,0,0])
                         cylinder(h=25,r=1.6,$fn=60);    
-                    translate([-2,-20.5,0])
+                    translate([-2,-33,0])
                         cylinder(h=25,r=1.6,$fn=60);
                 }
                 // M4 drill for spring

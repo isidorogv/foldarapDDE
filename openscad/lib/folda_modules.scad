@@ -234,33 +234,23 @@ module nema17drills(hg=5,dia=3){
 }
 
 
-module hotendhead(vinsert=true,filament=true,bcoupling=false){
+module hotendhead(filament=true,bcoupling=true){
     
     union(){
-        /*if (vinsert){
-            // The hotend head will be fixed to the extruder
-            // with a couple of M3 screws and inserted vertically
-            cylinder(h=15.25,r=8.15,$fn=50);
-        }
-        else{*/
             // upper mount
             translate([0,0,0])cylinder(h=5.5,r=8.15,$fn=50);
             // neck
             translate([0,0,5.1])cylinder(h=5.1,r=6.15,$fn=50);
             // lower mount
             translate([0,0,10.1])cylinder(h=5.5,r=8.15,$fn=50);
-            // This makes posible to carve a side slot
-            // in order to insert the hotend from a side,
-            // not vertically
-            /*translate([-8.15,0,0])cube([16.3,20,5.1]);
-            translate([-6.15,0,5])cube([12.3,20,5.1]);
-            translate([-8.15,0,10.1])cube([16.3,20,5.1]);
-        }*/
+
+        // Room for bowden clamp in E3D V6 hotends
         if (bcoupling){
             cylinder(h=17.75,r=4,$fn=60);
         }
-        // 1,75mm hole filament
+        // 1,75mm hole filament with 4mm bowden tube
         if (filament)
-        translate([0,0,-10])cylinder(h=100,r=1.1,$fn=50);
+        translate([0,0,-10])cylinder(h=100,r=2.1,$fn=50);
+        // 
     }
 }

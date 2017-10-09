@@ -20,7 +20,7 @@ include <lib/extruder_foldarap_mod.scad>
 
 // ----- X axis -----
 
-x_carriage(pitch=2);
+//x_carriage(pitch=2);
 //x_motor_holder();
 //x_motor_idler();
 
@@ -64,7 +64,7 @@ x_carriage(pitch=2);
 
 //mirror()idler();
 
-//fan_pipe();
+fan_pipe(l=55);
 //rotate([90,0,0])fan_nozzle();
 
 //rotate([0,-90,0])e_fixing_chain_02();
@@ -91,6 +91,22 @@ x_carriage(pitch=2);
 for(r=[0:25:115]){
     for(c=[0:25:115]){
         translate([r,c,0])cable_chain();
+    }
+}
+*/
+
+
+/*
+// Collet clamp
+difference(){
+    cylinder(h=1.4,r=8,$fn=80);
+    
+    translate([0,0,-3])cylinder(h=10,r=3.5,$fn=40);
+    translate([-3.5,0,-3])cube([7,20,10]);
+    translate([0,0,0.8])difference(){
+        cylinder(h=2,r=6.5,$fn=80);
+        
+        translate([0,0,-3])cylinder(h=10,r=5,$fn=40);
     }
 }
 */
