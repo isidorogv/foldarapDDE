@@ -8,7 +8,8 @@ There are many versions of this fantastic 3D printer, but mine has a direct extr
 
 Thankx to...
 
-  * [EnmanuelG/OpenEdge](https://github.com/OpenEdge) (foldarap design)
+  * [EnmanuelG/OpenEdge](https://github.com/OpenEdge), foldarap design.
+  * [ffleurey](https://www.thingiverse.com/thing:147705), direct-drive hinged extruder.
   * [rowokii](https://www.thingiverse.com/thing:767317), parametric universal spool holder.
   * [judetomate](https://www.thingiverse.com/thing:47752), spool holder idea.
 

@@ -1,30 +1,69 @@
-// Direct Extruder for Huxley i3 3D Printer/Foldarap D v3.0
+// Direct Extruder for Huxley i3/Foldarap DDE 3D printers
 // Based on https://www.thingiverse.com/thing:147705, by ffleurey
 // Distributed under the terms of GNU/GPL v3.0 or higher
 
-// Modifications by Isidoro Gayo (isidoro.gayo@wanadoo.es)
-// https://github.com/isidorogv/Huxley-reloaded
+// Modifications by Isidoro Gayo (isidoro.gayo@gmail.com)
 // Distributed under the terms of GNU/GPL v3.0 or higher
 
 // -----------------------------------------------------------------
 
 
-
-module idler(){
-    
-    difference(){
-        import("aux/idler.stl");
-        
-        translate([0,10,7])difference(){
-            #cylinder(h=10,r=7.5,$fn=60);            
-            translate([0,0,-2])cylinder(h=20,r=2.05,$fn=60);
+module extruder_idler(thk=9){
+ 
+    difference(){   
+        union(){
+            // main body
+            translate([-15,18,0])
+            hull(){
+                for(x=[5,-5]){
+                    translate([x,-x,0])
+                        cube([28,1,thk]);    
+                }
+            }
+            // arm
+            translate([-27,21,0]){
+                cylinder(h=thk,r=3);
+                translate([0,-3,0])
+                    cube([33,6,thk]);
+            }
+            // reinforcement piece
+            translate([-10,10,0])
+                cube([10,14,thk]);
+            // idler axis
+            translate([15.5,15.5,0])
+                cylinder(h=thk,r=3.5);
+            // bearing axis    
+            translate([0,10,0])
+                cylinder(h=2,r=6);
         }
-        //#translate([0,-3.5,0])rotate([0,0,45])cube([20,20,20]);
-        translate([0,10,-5])cylinder(h=20,r=2.1,$fn=60); 
+        // M3 pivot axis
+        translate([15.5,15.5,-1])
+            cylinder(h=thk+2,r=1.6);
+        // M4 bearing axis
+        translate([0,10,-1]){
+            cylinder(h=thk+2,r=1.6);
+            // bearing room
+            translate([0,0,3])
+                cylinder(h=thk+2,d=15+ease);
+        }
+        // M4 pushing screw drill
+        translate([-21,0,thk/2])
+        rotate([-90,0,0])
+            hull(){
+            for(x=[-2,2]){
+                translate([x,0,0])
+                    cylinder(h=25,r=2.1);
+            }
+        }
+        // internal rounded corner 
+        translate([-14,10,-1])
+            cylinder(h=thk+2,d=16);
     }
+    // bearing bevel
+    translate([0,10,0])
     difference(){
-        color("red")translate([0,10,5])cylinder(h=2.4,r=3,$fn=60); 
-        translate([0,10,0])cylinder(h=20,r=2.1,$fn=60); 
+        cylinder(h=2.5,r=3);
+        cylinder(h=thk+2,r=1.6,center=true);
     }
 }
 
@@ -164,9 +203,10 @@ module extruder(thplate=5){
 }
 
 
+module fan_pipe(l=45,isize=8){
+
 // Support for an axial fan (diameter 45 mm)
 // isize = inductive diameter, default for a M8 inductive
-module fan_pipe(l=45,isize=8){
     
     difference(){
         union(){

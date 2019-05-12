@@ -46,7 +46,7 @@ $fn = 50;
 
 //translate([wslot+2*thwall+1,-30,-2])
 //rotate([90,0,90])
-    x_carriage();
+    //x_carriage();
     
 //x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
 
@@ -113,8 +113,7 @@ translate([0,-7,-1])
 
 // ----- Extruder -----
 
-//mirror()
-    //idler();
+extruder_idler();
 
 //fan_pipe(l=40,isize=8);
 //rotate([90,0,0])
