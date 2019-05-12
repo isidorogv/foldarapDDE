@@ -1,6 +1,6 @@
 # What's that?
 
-**Foldarap Mod** is a modified version of Foldarap v.1.0 3D printer originally made by EnmanuelG.
+**Foldarap Mod** is a modified version of Foldarap v.1.0 3D printer originally made by [EnmanuelG](https://github.com/EmmanuelG/Foldarap).
 
 ![Foldarap Mod v.1.0](pics/foldarap_mod_v12_byMACasanova.jpg)
 
