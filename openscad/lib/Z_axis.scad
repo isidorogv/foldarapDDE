@@ -12,14 +12,12 @@
 
 module z_motor_holder(profile=wslot,
                       thick=5,
-                      mt=4,
-                      center=true){
+                      mt=4){
     
 // profile = profile dimensions; 20 = 20x20, 22 = 22x22 and so...
 // lprofile = profile lenght when it is not square-shape, in mm
 // thick = thickness of NEMA motor fixing plate/collar
 // mt = screw metric; e.g. 3 = M3, 4 = M4, and so...
-// center = if motor plate should be centered or not
 
     NEMA = stepper==14 ? NEMA14 : NEMA17;
     
@@ -31,8 +29,8 @@ module z_motor_holder(profile=wslot,
             union(){
                 translate([NEMA/2+profile+3*thwall,NEMA/2+thwall,0])
                         motor_plate(ht=thick,
-                        notch=true,
-                        chamcor=false);
+                                    notch=true,
+                                    chamcor=false);
                 // vertical side reinforcement
                 translate([0,thwall,0])
                 rotate([90,0,0])
@@ -90,7 +88,7 @@ module z_upper_joint(profile=wslot,l=2.8*wslot,reinf=false,mt=4){
                 thwall+profile,
                 2*thwall+profile]);
             // room for profile
-            translate([thwall,thwall,thwall+profile-1])
+            translate([thwall-ease/2,thwall,thwall+profile-1])
                 cube([profile+ease,profile+1,2*thwall+profile+2]);
             // second M3 drill
             translate([thwall+profile/2,-1,thwall+1.8*profile])
@@ -134,9 +132,8 @@ module z_hinge_outter(profile=wslot,mt=4,bsd=8,ssd=7){
 // profile = profile dimensions in mm;
 // e.g., 20 = 20x20, 15 = 15x15, and so...
 // mt = fixing screw metric; e.g., 3 = M3, 4 = M4 and so...
-// bsd = big splunger diameter in mm
-// ssd = small splunger diameter in mm
-// ct = collar splunger diameter in mm
+// bsd = big splunger diameter in mm (collar)
+// ssd = small splunger diameter in mm (body)
     
     // Maximun height of this piece
     hm=2*profile+span;
@@ -177,7 +174,7 @@ module z_hinge_outter(profile=wslot,mt=4,bsd=8,ssd=7){
                                 lenght=2*thwall+2,
                                 angle=90); 
             }
-        }    
+        }
         // fixing screws
         translate([-(2*thwall+profile+2)/2,
                     0,

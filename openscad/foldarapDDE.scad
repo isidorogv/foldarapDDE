@@ -1,21 +1,22 @@
-// -------------------------------------------------------------
-// Custom Foldarap 3D printer
-// Based on Original Foldarap v.1.0, by EnmanuelG
-// http://reprap.org/wiki/FoldaRap1_Build_Manual
-// Distributed under the terms of GNU/GPL v3.0 or higher
+//------------------------------------------------------------
+//---- 3D printed pieces for Scalable Foldarap 3D printer ----
+//------------------------------------------------------------
+// (c) 2018-2019 Isidoro Gayo Vélez (isidoro.gayo@gmail.com)
 
-// Modifications by Isidoro Gayo (isidoro.gayo@gmail.com)
-// https://github.com/isidorogv/foldarap_mod
-// Modified parts are distributed under the terms of 
-// GNU/GPL v3.0 or higher
-// -------------------------------------------------------------
+// Credits:
+// -- Enmanuel Gillot, for his superb fodable 3D printer
 
-include <lib/modules.scad>
+//------------------------------------------------------------
+//      Released under the terms of GNU/GPL v3.0 or higher
+//------------------------------------------------------------
+
+include <lib/core.scad>
 include <lib/misc.scad>
 include <lib/X_axis.scad>
 include <lib/Y_axis.scad>
 include <lib/Z_axis.scad>
 include <lib/extruder.scad>
+include <lib/foldaDDE.scad>
 
 
 // Parameters to modify. 
@@ -32,7 +33,7 @@ stepper=14;     // type of stepper motor;e.g. 14 = NEMA14, and so...
 
 lbearing=24;    // bearing lenght in mm for a 8mm smooth rod
 rbearing=7.5;   // M8 bearing radius in mm
-rrod=3;         // smooth rod radius in mm
+rrod=4;         // smooth rod radius in mm
 drod=130;       // distance between Y rods in mm
 bhole=95.25/2;  // M3 hole distance from bed center
                 // for Miniheatbed, by F. Malpartida
@@ -48,14 +49,15 @@ $fn = 50;
 //rotate([90,0,90])
     //x_carriage();
     
-//x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
+x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
 
-//x_motor_idler(hg=NEMA14+2*thwall);
+//translate([-3*thwall-wslot,2*thwall+wslot,0])
+    //x_motor_idler();
 
 /*
 translate([20,5,0])
 rotate([90,0,0])
-    x_bearing_holder(span=13);
+    sync_bearing_holder(span=13);
 */
 
 
@@ -68,13 +70,17 @@ rotate([90,0,0])
 //rotate([180,0,0])
   //  knob(thk=4,dia=16,spc=false,mt=3,nk=12,dk=2);
 
-//y_motor_idler();
-
+//y_motor_idler(bd=20);
+//translate([20,5,0])
+//rotate([90,0,0])
+  //  sync_bearing_holder(thick=18,bd=18);
+    
 //IEC_plate();
 
 //y_motor_holder(stepper=17,thick=10);
 
-//y_rod_holder(mt=4);
+//y_rod_holder();
+
 /*
 difference(){
 
@@ -84,12 +90,15 @@ translate([0,-7,-1])
 }
 */
 
-//frog();
+//frog(ad=35);
+
 // you have to print two of these
 //y_bearing_clamp();
 
+
+
 //translate([0,10,0])
-    //foot(lg=footl,mt=4);
+  //  foot(lg=footl,mt=4);
 //mirror([0,1,0])
   //  foot(lg=footl,mt=4);
 
@@ -98,7 +107,7 @@ translate([0,-7,-1])
 // ----- Z axis -----
 
 //translate([0,10,0])
-  //z_motor_holder(mt=4,center=true);
+  //z_motor_holder(mt=4);
 //mirror([0,1,0])
   //  z_motor_holder(mt=4);
 
@@ -113,7 +122,7 @@ translate([0,-7,-1])
 
 // ----- Extruder -----
 
-extruder_idler();
+//extruder_idler();
 
 //fan_pipe(l=40,isize=8);
 //rotate([90,0,0])

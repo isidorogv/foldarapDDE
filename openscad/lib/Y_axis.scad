@@ -1,7 +1,7 @@
 //------------------------------------------------------------
 //      3D printed pieces for Baby Foldarap 3D printer
 //------------------------------------------------------------
-// (c) 2018 Isidoro Gayo Vélez (isidoro.gayo@wanadoo.es)
+// (c) 2018-2019 Isidoro Gayo Vélez (isidoro.gayo@gmail.com)
 
 // Credits:
 //--> Enmanuel Gillot
@@ -185,142 +185,111 @@ module y_motor_holder(profile=wslot,stepper=14,thick=5,mt=4){
 }
 
 
-module y_motor_idler(profile=wslot,thick=5,mt=4){
+module y_motor_idler(profile=wslot,
+                        thick=5,
+                        mt=4,
+                        bthick=13,
+                        bd=11){
 
 // thick = base thickness in mm.
 // mt = metric for fixing screws
+// bthick = bearing thickness in mm
+// bd = bearing diameter in mm
     
-    bthick = 9; // bearing thickness in mm
-    bd = 11;    // bearing diameter in mm
-    vpos = span+2*profile-6;
+    vpos = span+2*profile-6;    // auxiliar variable for drills
     
     // fixing base for the idler
     difference(){
         // fixing base
         linear_extrude(height=thick)
         offset(r=3,chamfer=false)
-            square([20,vpos],center=true);
+            square([bthick+2*thwall-6,vpos],center=true);
 
         // fixing screw drills
-        for(y=[vpos/2-profile/2+3,6,-vpos/2+profile/2-3]){
+        for(y=[vpos/2-profile/2+3,vpos/2-20,-vpos/2+profile/2-3]){
             translate([0,y,-1])
                 cylinder(h=thick+2,d=mt+ease);
         }
+        // screw heads
+        for(y=[vpos/2-profile/2+3,-vpos/2+profile/2-3]){
+            translate([0,y,thwall])
+                cylinder(h=thick+2,r=3.5);
+        }
+        // hollow for saving filament/printing time
+        translate([0,-8,-1])
+            hollow(wd=30,lg=bthick-thwall,rd=2,hg=thick+2);
     }
     // side walls
-    for(x=[-thwall-9.5,9]){
-        translate([x,6,3*thwall+thick])
+    for(x=[-thwall-9.5+3,9.5-3+ease]){
+        translate([x,vpos/2-20,3*thwall+thick])
         rotate([0,90,0])
         hull(){
-            translate([0,bd,0])
-                cylinder(h=4,r=3);
-            translate([0,-bd,0])
-                cylinder(h=4,r=3);
-            translate([3*thwall,-profile,0])
-                cube([thwall,2*profile,4]);
+            translate([0,bd/2-3,0])
+                cylinder(h=thwall-ease,r=3);
+            translate([0,-bd/2+3,0])
+                cylinder(h=thwall-ease,r=3);
+            translate([3*thwall,-bthick,0])
+                cube([thwall,2*bthick,thwall-ease]);
         }
     }
-    // bearing 623ZZ holder
-    translate([3*bthick,bd,5])
-    rotate([90,0,0])
-    union(){
-		for(z=[[[0,0,0],[0,0,0]],
-                [[0,0,2*bthick],[180,0,0]]]){
-            translate(z[0])
-            rotate(z[1])
-            difference(){
-                union(){
-                    hull(){
-                        cylinder(h=3.5,r=5);
-                        translate([0,-5,0])
-                            cube([bd,10,3.5]);
-                    }
-                    translate([0,0,3.5])
-                        cylinder(h=1,r1=3.5,r2=2);
-                }
-                // M3 drill axis
-                translate([0,0,-10])cylinder(h=30,r=1.5,$fn=90);
-            }
+}
+
+
+module y_bearing_clamp(h=14,wd=2*rbearing+6,th=2*lbearing,cham=2){
+    
+// h = clamp height in mm
+// wd = clamp width in mm
+// th = clamp thickness in mm
+// cham = chamfer in upper bearing clamp border in mm
+    
+    difference(){
+        union(){
+            // clamp base
+            translate([0,th,0])
+            rotate([90,0,0])
+            linear_extrude(height=th)
+                polygon(points=[[0,0],
+                                [0,h-cham],
+                                [cham,h],
+                                [wd-cham,h],
+                                [wd,h-cham],
+                                [wd,0]]);
+            // fixing base
+            cube([wd+9,th,6]);
         }
-        // adjustable tensioner
-        #difference(){
-            translate([7,-5,0])
-                cube([4,10,2*bthick]);
-            // M3 tensioner screw
-            translate([6,0,bd/2+3.5])
-            rotate([0,90,0])
-            union(){
-                cylinder(h=10,r=1.6);
+        // clamp room
+        translate([wd/2,-1,h-3])
+        rotate([-90,0,0])
+            cylinder(h=th+2,r=rbearing);
+        // fixing screws
+        for(y=[6,th-6]){
+            translate([wd+4,y,-1]){
+                cylinder(h=8,r=1.6);
+                translate([0,0,4])
                 rotate([0,0,30])
                     cylinder(h=4,r=3.2,$fn=6);
             }
         }
-        // fake bearing for reference
-        %translate([0,0,4.5])
-            cylinder(h=bthick,d=bd);
-	}
+    }
 }
 
 
-module y_bearing_clamp(){
-        
-    // standalone bearing clamp
-    difference(){
-        // main body
-        union(){
-            cylinder(h=2*lbearing+2,r=rbearing+3,$fn=50);
-            cube([rbearing+12,rbearing+3,2*lbearing+2]);
-        }
-        // hole for bearings
-        translate([0,0,-1])
-            cylinder(h=2*lbearing+4,r=rbearing,$fn=50);    
-        // side slot
-        translate([-2*rbearing,-0.5,-1])
-                cube([2*rbearing,1,2*lbearing+4]);
-        // base bed clamp
-        union(){        
-            // slot for bed base
-            translate([rbearing+3,((rbearing+3)/2)-1.8,-1])
-                cube([14,3.6,2*lbearing+4]);
-            // M3 fixing screws
-            translate([rbearing+7.5,-2,10])rotate([-90,0,0]){
-                for(y=[0,-30]){
-                    translate([0,y,0]){
-                        // M3 screw...
-                        cylinder(h=rbearing+6,r=1.6,$fn=50);
-                        // ... and nut
-                        rotate([0,0,30])
-                        cylinder(h=4,r=3.15,$fn=6);
-                    }
-                }
-            }
-        }
-    }    
-}
+module frog(btk=thwall,ad=27){
 
-
-module frog(btk=thwall){
+// btk = base thickness in mm
+// ad = lower arm distance in mm
     
     difference(){
-        union(){
-        translate([0,0,-5])
-            frog_arm(btk=btk);
-            frog_base(btk=btk);
-        translate([0,0,-5])
-        mirror([0,1,0])
-            frog_arm(btk=btk);
-        }
+        frog_base(btk=btk,dist=ad);
+        
         // endstop drills
-        for(x=[-20,20]){
             for(y=[((2*lbearing+2)/2)-4,-((2*lbearing+2)/2)+4]){
-                translate([x,y,0])
-                //union(){
+                translate([12,y,0])
                 for(a=[-9.2/2,9.2/2]){
                     translate([a,0,-1])
                         cylinder(h=btk+2,r=1.4);
                 }
             }
-        }
         // hole for fixing screws
         for(x=[bhole,-bhole]){
             for(y=[-bhole,bhole]){
@@ -330,7 +299,7 @@ module frog(btk=thwall){
         }
         // M3 drills for belt holder
         translate([-5,0,-2])
-        for(y=[20.5,-20.5]){
+        for(y=[lbearing-3,-lbearing+3]){
             translate([0,y,0])
                 cylinder(h=10,r=1.6);
         }
@@ -338,18 +307,20 @@ module frog(btk=thwall){
 }
 
 
-module frog_arm(btk=thwall,dist=35){
+module frog_arm(btk=thwall,dist=27){
+
+// Auxiliar module, NOT for printing!!
     
 // btk = base thickness in mm
-// dist = arm middle support distance in mm
+// dist = lower arm distance in mm
     
     d = dist > bhole-10 ? bhole-10 : dist;    
 
     // we build right arm, middle support
     // and left arm all in one time
-    for(i=[[[-bhole,bhole,5],thwall,4,[-d,20.5,5],thwall,6],
-            [[-d,20.5,5],thwall,6,[d,20.5,5],thwall,6],
-            [[bhole,bhole,5],thwall,4,[d,20.5,5],thwall,6]]){
+    for(i=[[[-bhole,bhole,5],thwall,4,[-d,lbearing-4,5],thwall,6],
+            
+            [[bhole,bhole,5],thwall,4,[d,lbearing-4,5],thwall,6]]){
         hull(){
             translate(i[0])
                 cylinder(h=i[1],r=i[2]);
@@ -360,34 +331,42 @@ module frog_arm(btk=thwall,dist=35){
 }
 
 
-module frog_base(rad=3,btk=thwall){
+module frog_base(rad=3,btk=thwall,dist=27){
+
+// Auxiliar module, NOT for printing!!
     
     // btk = base thickness in mm
     // rad = roundness radio on corners in mm
-    // frog base width
     
+    // frog base width in mm    
     lx = ((drod-2*(rbearing+3))-2*rad)/2;
     // frog base height
     ly = ((2*lbearing+2)-2*rad)/2;
     
-    difference(){    
+    difference(){
         // base
-        linear_extrude(height=btk)
-        offset(r=rad)
-            square([2*lx,2*ly],center=true);
-    
+        union(){
+            linear_extrude(height=btk)
+            offset(r=rad)
+                square([2*lx,2*ly],center=true);
+            translate([0,0,-5]){
+                frog_arm(btk=btk,dist=dist);
+            mirror([0,1,0])
+                frog_arm(btk=btk,dist=dist);
+            }
+        }
         // M3 fixing side slots
         for(x=[lx+1,-lx-1]){
-            for(y=[-(2*lbearing+2-20)/2,(2*lbearing+2-20)/2]){
-                translate([x,y,0])hull(){
+            for(y=[-(2*lbearing-12)/2,(2*lbearing-12)/2]){
+                translate([x,y,0])
+                hull(){
                     translate([-2,0,-2])
                         cylinder(h=10,r=1.6);
                     translate([2,0,-2])
                         cylinder(h=10,r=1.6);
                 }
             }
-        }
-        
+        }        
         // holes for saving filament
         for(x=[-lx/2,lx/2]){
             translate([x,0,-5])
@@ -412,7 +391,7 @@ module y_rod_holder(bl=2.5*(rrod+9),bw=wslot,bthick=3,mt=4){
             square([bl-4,bw-4],center=true);
 
         // M3 fixing screw drills
-        for(x=[-bl/2+5,bl/2-5]){
+        for(x=[-bl/2+mt,bl/2-mt]){
             translate([x,0,-1])
                 cylinder(h=bthick+2,d=mt+ease);
         }
@@ -550,7 +529,7 @@ module y_endstop_adj(profile=wslot,hg=50,mt=4){
             
             translate([0,0,1.5*profile])
             rotate([-90,0,0])
-                cylinder(h=50,d=16,$fn=4,center=true);
+                cylinder(h=50,d=0.8*profile,$fn=4,center=true);
         }
         for(x=[profile/2+20,-profile/2-20]){
             translate([x,0,-1])

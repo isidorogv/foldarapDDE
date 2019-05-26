@@ -1,3 +1,75 @@
+//-----------------------------------------------------------
+//  ---- Core modules for Scalable Foldarap 3D printer ----
+//-----------------------------------------------------------
+// (c) 2018-2019 Isidoro Gayo Vélez (isidoro.gayo@gmail.com)
+
+// Credits:
+// -- Enmanuel Gillot, for his superb fodable 3D printer
+
+//------------------------------------------------------------------
+//       Released under the terms of GNU/GPL v3.0 or higher
+//------------------------------------------------------------------
+
+
+module sync_bearing_holder(thick=13,bd=14){
+    
+// thick = maximun room for synchronic bearing + holder, in mm.
+    
+    // main body
+    difference(){
+        // base preform
+        translate([-4,-4,0])
+        linear_extrude(height=thick)
+        offset(delta=2,chamfer=true)
+            square([bd+2,8]);
+        
+        // room for synchronic bearing
+        translate([-bd/2,-10,(thick+ease-9)/2])
+            cube([bd+1,20,9+ease]);
+        // M3 axis drill
+        translate([0,0,-1])
+            cylinder(h=thick+2,r=1.4);
+        // drill for M3 belt tensioner screw (head+thread)
+        #translate([bd/2,0,thick/2])
+        rotate([0,90,0])
+        union(){
+            rotate([0,0,30])
+                cylinder(h=3,r=3.3,$fn=6);
+            cylinder(h=10,r=1.6);
+        }
+    }
+    // fake synchronic bearing
+    %translate([0,0,(thick-9)/2+ease])
+    union(){
+        cylinder(h=1,d=14);
+        cylinder(h=9,d=10);
+        translate([0,0,8])
+            cylinder(h=1,d=14);
+    }
+}
+
+
+module slot_clamp(profile=wslot,h=NEMA17,ssize=5){
+
+// Auxiliar module for motor holder and idler, 
+    // DO NOT print it!
+    
+    // angle base
+    difference(){
+        cube([profile+thwall,profile+thwall,h]);
+        translate([thwall-ease/2,thwall-ease/2,-1])
+            cube([profile+ease,profile+ease,h+2]);
+    }
+    // slot pieces
+    translate([thwall-ease,(profile-ssize)/2+thwall+ease/2,0])
+        cube([3.5,ssize-ease,h]);
+    translate([(profile-ssize)/2+thwall+ease/2,thwall-ease,0])
+        cube([ssize-ease,3.5,h]);
+    
+    // fake profile for reference
+    %translate([thwall,thwall,-10])
+        cube([profile,profile,100]);
+}
 
 
 module teardrop(radius,length,angle) {

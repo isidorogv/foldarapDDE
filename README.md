@@ -12,6 +12,7 @@ Thankx to...
   * [ffleurey](https://www.thingiverse.com/thing:147705), direct-drive hinged extruder.
   * [rowokii](https://www.thingiverse.com/thing:767317), parametric universal spool holder.
   * [judetomate](https://www.thingiverse.com/thing:47752), spool holder idea.
+  * [whosawhatsis](https://www.thingiverse.com/thing:3457), parametric teardrop script.
 
 ...for their respective works.
 
