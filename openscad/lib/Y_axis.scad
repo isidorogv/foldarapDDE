@@ -12,7 +12,9 @@
 
 
 module profile_joint(profile=wslot,l=2.5*wslot,mt=3,contactp=true){
-
+// Joints a couple of aluminium profiles at 90 deg.
+// It is the base for building the printer feet
+    
 // profile = slot dimensions; 20 = 20x20, 22 = 22x22 and so...
 // l = lenght
 // mt = metric for fixing screws; e.g. 3 = M3, 4 = M4, and so...
@@ -106,7 +108,7 @@ module foot(profile=wslot,lg=40,mt=3,d=span){
 
 
 module y_belt_clamp(cs=2*lbearing,ch=8,bthk=0.8,pitch=2){
-
+   
 // cs = clamp size (lenght) in mm
 // ch = clamp height in mm, it includes the fixing part
 // bthk = belt thickness in mm
@@ -236,6 +238,7 @@ module y_motor_idler(profile=wslot,
 
 
 module y_bearing_clamp(h=14,wd=2*rbearing+6,th=2*lbearing,cham=2){
+// Holds tight the bearings on smooth rods (Y axis)
     
 // h = clamp height in mm
 // wd = clamp width in mm
@@ -412,94 +415,9 @@ module y_rod_holder(bl=2.5*(rrod+9),bw=wslot,bthick=3,mt=4){
 }
 
 
-module y_belt_clamp02(){
-    
-// PRUSA iteration3 Y belt holder
-// Original idea by Josef Průša <iam@josefprusa.cz> 
-// and contributors
-// http://www.reprap.org/wiki/Prusa_Mendel
-// http://prusamendel.org
-// Released under the terms of GNU-GPL v3 or higher
-// -------------------------------------------------------
-// Modified by Isidoro Gayo <isidoro.gayo@gmail.com>
-// for Huxley i3/Foldarap 3D printers (oct 2018/apr 2019)
-// -------------------------------------------------------
-    
-    difference(){
-        // main body
-        union(){
-            // upper part (screws)...
-            linear_extrude(height=15)
-            offset(chamfer=true)
-                square([28,25]);
-            // ... and lower part (belt)
-            translate([-10,26,1])
-            rotate([90,0,0])
-            linear_extrude(height=8)
-            offset(chamfer=true)
-                square([48.5,13]);
-        }
-        // belt space cutaway around belt pivots
-        for(pos=[[16,18,2],[12,5,2]]){
-            translate(pos) 
-                cylinder(h=16,r=7.2);  
-        }
-    
-        // belt clamp notches and bevels
-        for(p=[[[10,7,2],[0,0,0],[32,2.1,16]],
-            [[16,8,12],[45,0,0],[15,5,5]],
-            [[-20,9,2],[0,0,0],[28,2.1,16]],
-            [[-2,10,12],[45,0,0],[10,5,5]]]){     
-            
-            translate(p[0]) 
-            rotate(p[1])
-                cube(p[2]);
-        }        
-        // drills for all screws
-        translate([-2,0,0])
-        // left and right screw holes
-        for(pos=[[-4,17,7.5],[36,17,7.5]]){
-            translate(pos)
-            rotate([-90,0,0])
-            union(){
-                // drill for one screw
-                hull(){
-                    for(c=[[-1.5,0,0],[1.5,0,0]]){
-                        // screw drill
-                        translate(c)
-                            cylinder(h=10,r=1.6);
-                        }
-                }            
-                hull(){
-                    for(c=[[-1.5,0,0],[1.5,0,0]]){
-                        // head screw recess
-                        translate(c)
-                            cylinder(h=5,r=3);
-                    }
-                }
-            }
-        }        
-        // removing minor details for cosmetic improvement
-        rotate([0,0,40]) 
-        translate([11,1,2]) 
-            cube([10,4,16]);        
-    }
-    // placing the belt pivots on main body
-    for(xy=[[16,18,0],[12,5,0]]){
-        translate(xy)
-        // belt pivot
-        for(p=[[[0,0,0],11,3.5,3.5],
-                [[0,0,11],3,3.5,2.5]]){
-            // lower and upper part
-            translate(p[0])
-                cylinder(h=p[1],r1=p[2],r2=p[3]);
-        }
-    }
-}
-
-
 module y_endstop_adj(profile=wslot,hg=50,mt=4){
 
+// Adjusting head for the endstop
     difference(){
         // base
         hull(){
@@ -538,3 +456,48 @@ module y_endstop_adj(profile=wslot,hg=50,mt=4){
         }
     }
 }
+
+
+module y_motor_pulley_holder(thick=5,stepper=14){
+    
+    // Holder for Y belt pulleis    
+    NEMA = stepper==14 ? [NEMA14,26,24] : [NEMA17,31,24];
+    
+    difference(){
+        union(){
+            // support base for first pulley
+            translate([0,0,0])
+            rotate([0,0,180])
+            motor_plate(thick=thick,
+                        stepper=stepper,
+                        half=true,
+                        chamcor=false);    
+            // support for second pulley
+            translate([NEMA[1]/2+10,0,0])
+            hull(){
+                translate([4,3,0])
+                    cylinder(h=thick,d=15);
+                translate([-7,-NEMA[0]/2,0])
+                    cube([1,NEMA[0],thick]);
+            }
+        }
+        // drills for fixing pulley screw
+        translate([NEMA[1]/2+14,3,-1]){
+            cylinder(h=thick+2,r=1.6);
+            cylinder(h=4,r=3.2,$fn=6);
+        }
+    }
+    
+    // fake synchronic bearing
+        for(pos=[[NEMA[1]/2,NEMA[1]/2,5],
+                [NEMA[1]/2+14,3,5]]){
+            %translate(pos)
+            union(){
+                cylinder(h=1,d=14);
+                cylinder(h=9,d=10);
+                translate([0,0,8])
+                    cylinder(h=1,d=14);
+            }
+        }
+}
+

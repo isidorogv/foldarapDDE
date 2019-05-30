@@ -107,9 +107,10 @@ module teardrop(radius,length,angle) {
 	}
 }
 
-// Auxiliary module
-module dim_line(l=10,d=30){
 
+module dim_line(l=10,d=30){
+// Auxiliary module
+    // Used for dimensioning POM wheels
     color([0,0,0]){
         translate([0.5,d/2,0])rotate([0,90,0])
             cylinder(h=l,r=0.1);
@@ -120,9 +121,10 @@ module dim_line(l=10,d=30){
     }    
 }
 
-// Auxiliary module
+
 module dimension(sep=10,dim=10,tsize=4){
-    
+// Auxiliary module
+    // Used for dimensioning POM wheels    
     dim_line(l=sep,d=dim);
     mirror([0,1,0])dim_line(l=sep,d=dim);
     color([0,0,0])
@@ -133,6 +135,7 @@ module dimension(sep=10,dim=10,tsize=4){
 
 
 module POMwheel(outd=24,axd=5,thw=10,fp=5.6,dim=false){
+    // POM wheel model
     
     // outd = outer wheel diameter in mm
     // axd = axis wheel diameter in mm.
@@ -204,24 +207,6 @@ module hobbed_mk8(al=11,rd=4.5,rd2=3.5){
 		}
 		translate([0,0,-5])cylinder(h=2*al, r=2.5, $fn=50);
 	}
-}
-
-
-module NEMA14(tp=14,lg=33,dualx=false){
-
-// DEPRECATED: DO NOT use anymore!!!
-// ONLY FOR backward compatibility
-
-    nema_motor(type=tp,l=lg,daxis=dualx);
-}
-
-
-module NEMA17(tp=17,lg=39,dualx=false){
-
-// DEPRECATED: DO NOT use anymore!!!
-// ONLY FOR backward compatibility
-
-    nema_motor(type=tp,l=lg,daxis=dualx);
 }
 
 
@@ -307,6 +292,8 @@ module motor_plate(thick=5,
 
 module nema_motor(stepper=14,h=33,daxis=false,hobbed=false){
 
+// 3D NEMA stepper model
+    
 // type = type of stepper motor,
 // e.g., 14 = NEMA14 or 17 = NEMA17
     
@@ -352,37 +339,6 @@ module nema_motor(stepper=14,h=33,daxis=false,hobbed=false){
                     translate([x,y,0])cylinder(h=8,r=1.5,$fn=30);
             }
         }
-    }
-}
-
-
-module nemacollar(hg=5){
-
-// DEPRECATED: DO NOT use anymore!!!
-// ONLY FOR backward compatibility
-    
-    motor_plate(stepper=17,thick=hg); 
-}
-
-
-module nema17collar(h=5){
-
-// DEPRECATED: DO NOT use anymore!!!
-// ONLY FOR backward compatibility
-    
-    nemacollar(hg=h);
-}
-
-
-module nema17drills(hg=5,dia=3){
-
-// DEPRECATED: DO NOT use anymore!!!
-// ONLY FOR backward compatibility
-    
-    for(x=[31/2,-31/2]){
-         for(y=[31/2,-31/2]){
-            translate([x,y,0])cylinder(h=hg+2,r=1.6,$fn=30);
-         }
     }
 }
 

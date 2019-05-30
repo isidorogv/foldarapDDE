@@ -1,8 +1,10 @@
+// -----------------------------------------------------------------
+
 // Direct Extruder for Huxley i3/Foldarap DDE 3D printers
 // Based on https://www.thingiverse.com/thing:147705, by ffleurey
 // Distributed under the terms of GNU/GPL v3.0 or higher
 
-// Modifications by Isidoro Gayo (isidoro.gayo@gmail.com)
+// (copyleft) 2016-2019 by Isidoro Gayo (isidoro.gayo@gmail.com)
 // Distributed under the terms of GNU/GPL v3.0 or higher
 
 // -----------------------------------------------------------------
@@ -203,115 +205,113 @@ module extruder(thplate=5){
 }
 
 
-module fan_pipe(l=45,isize=8){
+module hotend_holder(){
 
-// Support for an axial fan (diameter 45 mm)
-// isize = inductive diameter, default for a M8 inductive
-    
-    difference(){
+        difference(){
+        // Preform
         union(){
-            // main body
-            difference(){
-                difference(){
-                    cube([14,19,l+5]);
-                
-                    translate([2,2,-5])cube([10,15,1.5*l]);
-                    translate([0,16,l+25])rotate([0,90,0])
-                        cylinder(h=35,r=25,$fn=90);
-                }
-                // fixing slot for axial fan
-                translate([0,0,l-5])difference(){
-                    translate([-2,-3,0])cube([20,25,12]);
-                
-                    translate([1,1,-2])cube([12,17,15]);
-                }
-            }
-            // upper fixing screw
-            translate([0,9.5,l-10])rotate([0,90,0])
-                cylinder(h=14,r=3.5,$fn=80);
-            // inductive holder
-            translate([((isize+4)/2)+14,9.5,0])difference(){
-                union(){
-                    hull(){
-                        translate([-(isize+4)/2,-(isize+4)/2,0])
-                            cube([1,isize+4,10]);
-                        cylinder(h=10,r=(isize+4)/2,$fn=80);
-                    }
-                    translate([isize/2,-2,0])difference(){
-                        // inductive clamp
-                        cube([8,4,10]);
-                    
-                        // M3 drill to get the slot tight
-                        translate([5,10,5])rotate([90,0,0])
-                            cylinder(h=20,r=1.6,$fn=60);
-                        // rounded corners in inductive clamp
-                        translate([3,6,5])rotate([90,0,0])
-                            rounded_corner(lg=10);
-                        translate([3,6,5])rotate([90,90,0])
-                            rounded_corner(lg=10);
-                    }
-                }
-                // internal hole for inductive sensor
-                translate([0,0,-5])
-                    cylinder(h=25,r=(isize/2)+0.1,$fn=60);
-                // adjustement slot
-                translate([0,-0.5,-5])cube([2*isize,1,25]);
+            // Extruder fixing body
+            translate([0,6,0])
+                cube([40,46,5]);
+            // Contact plane carriage-holder
+            translate([0,39,0])
+                cube([40,13,20]);
+            // reinforcement
+            translate([0,34,10])
+            rotate([0,90,0])
+                rounded_corner(lg=40,rd=5);
+        }
+        // hotend head room
+        translate([20,39,20])
+        rotate([-90,0,0])
+        union(){
+            translate([0,0,9])
+                cylinder(h=5,d=16+ease);
+            translate([0,0,-1.5])
+                cylinder(h=5,d=16+ease);
+            cylinder(h=13,d=12.5+ease);
+        }
+        // M3 nut holes for hotend
+        translate([20,45.5,16])
+        for(x=[-15,15]){
+            translate([x,0,0])
+            union(){
+                cylinder(h=15,r=1.6,center=true);
+                cube([5.5,15,3],center=true);
             }
         }
-        // taladro tornillo fijador superior
-        translate([-5,9.5,l-10])rotate([0,90,0])
-            cylinder(h=30,r=1.6,$fn=80);
-        translate([12,9.5,l-10])rotate([0,90,0])
-            cylinder(h=5,r=3.2,$fn=60);
-        // taladro tornillo fijador inferior...
-        translate([-5,9.5,3.5])rotate([0,90,0])
-            cylinder(h=25,r=1.6,$fn=80);
-        // ...contratuerca...
-        translate([13.5,9.5,3.5])rotate([30,0,0])rotate([0,90,0])
-            cylinder(h=5,r=3.2,$fn=6);
-        // ...y cabeza del tornillo
-        //translate([-2.5,9.5,3.5])rotate([0,90,0])
-        //    cylinder(h=5,r=3.5,$fn=80);
-        // test: plano de corte
-        //color("red")translate([-20,-20,-l/2])cube([60,30,2*l]);
+        // Fixing holes for M3 screw + nut...
+        for(feat=[[[14,20,-1],10,1.6,60],
+                    [[14,20,2],5,3.2,6],
+                    [[26,20,-1],10,1.6,60],
+                    [[26,20,2],5,3.2,6]]){
+            translate(feat[0])
+                cylinder(h=feat[1],r=feat[2],$fn=feat[3]);
+                        
+        }
+        // ... and upper ones
+        // left and right
+        for(pos=[[[5.75,45,2],[8.5,48.5,-4]],
+                [[28.75,45,2],[31.5,48.5,-4]]]){
+            translate(pos[0])
+                cube([5.5,10,3]);
+            translate(pos[1])
+                cylinder(h=12,r=1.6);
+        }
+        // Hole for x endstop
+        for(x=[5,35]){
+            translate([x,22,-5])
+                cylinder(h=15,r=1.2);
+        }
+        // bevel upper corners
+        translate([20,47,-5])
+        for(pos=[[[15,0,0],[0,0,0]],
+                [[-15,0,0],[0,0,90]]]){
+            translate(pos[0])
+            rotate(pos[1])
+                rounded_corner(lg=30);
+        }
+        // lower bevel
+        translate([-5,11,0])rotate([0,-90,180])
+            rounded_corner(lg=50);
     }
 }
 
 
-
-module fan_nozzle(){
-
+module hotend_holder_collar(){
+    
     difference(){
         union(){
-            translate([0,0,1.9])difference(){
-                cube([10,15,7]);
-                translate([1,1,-2])cube([8,13,15]);
-            }
-        // tornillo fijador
-        translate([1,7.5,5.5])rotate([0,90,0])
-            cylinder(h=8,r=2.6,$fn=80);
+            cylinder(h=13,r=12);
+            translate([-18,-5,0])
+            linear_extrude(height=13)
+            offset(delta=2,chamfer=true)
+                square([36,6]);
         }
-        // taladro tornillo fijador
-        translate([-5,7.5,5.5])rotate([0,90,0])
-            cylinder(h=30,r=1.6,$fn=80);
-    }
-    difference(){
-        //color("grey")
-        hull(){
-            translate([-2,-2,0])difference(){
-                cube([14,19,2]);
-                translate([2,2,-2])cube([10,15,15]);
-            }
-            
-            translate([-18,-2,-16])cube([5,19,1]);
+        // hotend head room
+        union(){
+            translate([0,0,9])
+                cylinder(h=5,d=16+ease);
+            translate([0,0,-1.5])
+                cylinder(h=5,d=16+ease);
+            cylinder(h=13,d=12.5+ease);
         }
-        hull(){
-            translate([1,1,1])cube([8,13,1]);
-                  
-            translate([-16.6,1,-16])cube([1,13,1]);
+        // M3 fixing screw
+        translate([0,0,6.5])
+        rotate([90,0,0])
+        for(x=[-15,15]){
+            translate([x,0,-1])
+                cylinder(h=10,r=1.6);
         }
-        translate([-18,-8,-20])rotate([0,-20,0])cube([5,30,10]);
-        // test: plano de corte
-        //color("crimson")translate([-40,-12,-18])cube([60,20,30]);
+        // bevel upper corners
+        for(pos=[[[15,1,8],[90,0,0]],
+                [[-15,1,8],[90,-90,0]]]){
+            translate(pos[0])
+            rotate(pos[1])
+                rounded_corner(lg=10);
+        }
+        // remove unused part
+        translate([-30,0,-2])
+            cube([60,20,20]);
     }
 }

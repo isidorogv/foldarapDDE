@@ -69,6 +69,8 @@ module z_motor_holder(profile=wslot,
 
 module z_upper_joint(profile=wslot,l=2.8*wslot,reinf=false,mt=4){
 
+// It joints the printer gantry (Z axis) pieces
+    
 // profile = slot dimensions; 20 = 20x20, 22 = 22x22 and so...
 // l = joint lenght in mm
 // reinf = vertical reinforcement
@@ -106,7 +108,7 @@ module z_upper_joint(profile=wslot,l=2.8*wslot,reinf=false,mt=4){
 
 module z_hinge_drills(profile=wslot,db=6,ds=5.2,pthk=2){
 
-// Auxiliar module
+// Auxiliar module for hinge pieces
     
     // profile = aluminium profile size, 20 = 20x20 and so...
     // db = biggest diameter on plunger in mm

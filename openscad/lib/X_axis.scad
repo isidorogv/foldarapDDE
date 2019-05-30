@@ -214,9 +214,9 @@ module x_endstop_holder(daxis=32){
 }
 
 
-// Auxiliar module, not directly used.
-module x_belt_clamp(wb=1.1){
 
+module x_belt_clamp(wb=1.1){
+// Auxiliar module, not directly used.
 // wb = belt thickness
     
     // main body

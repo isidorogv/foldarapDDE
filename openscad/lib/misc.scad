@@ -10,14 +10,12 @@
 //------------------------------------------------------------
 
 
-// Auxiliar module for knob module
 module screw_drills(nr=3.2,sr=1.6,nt=2,dd=10){
+    // Auxiliar module for knob module, Do NOT print!
     
-    // Makes drills in knob in order to the screw
-    // (knob axis) and a nut if needed. An screw
+    // Makes drills in knob in order to pass the clamping screw 
+    // (knob axis) through and a nut if needed. An screw
     // with hexagonal head can also be used.
-        
-    // by default, M3 is set.
     
     // nr = nut radius in mm, for a given metric
     // sr = screw radius in mm
@@ -39,7 +37,9 @@ module knob(thk=5,dia=24,mt=3,spc=true,knurl=true,nk=20,dk=5,f=40){
     // This is a knob in order to use in endstops,
     // belt tensioners and leveler thumb wheels, 
     // among other applications.
-
+        
+    // by default, M3 metric is set.
+    
     // thk = knob thickness in mm
     // dia = knob diameter in mm
     // spc = spacer, suitable for belt tensioners
@@ -97,6 +97,8 @@ module knob(thk=5,dia=24,mt=3,spc=true,knurl=true,nk=20,dk=5,f=40){
 
 module spool_knob(rd=20,hg=11){
 
+// Prints a piece which has an embebed nut (M8)
+// It's useful for keeping the spool holder pieces tight
     difference(){        
         union(){
             hull(){
@@ -124,9 +126,9 @@ module spool_knob(rd=20,hg=11){
 }
 
 
-// This is an auxiliar module, DO NOT print!!
-module minihotbed(){
 
+module minihotbed(){
+// This is an auxiliar module, DO NOT print!!
 // Mini Heatbed by F. Malpartida
     %cube([100,100,2],center=true);
     
@@ -141,36 +143,51 @@ module minihotbed(){
 
 
 module spool_clamp(m=8,ht=40,perfil=20,slot=6){
+// It holds a M8 threaded rod firmly as a rotation axis for spool
+// Two pieces like this one are needed to hold the spool
 	difference(){
 	union(){
 		difference(){
 			hull(){
 				cylinder(h=5,r=(m/2)+2.5,$fn=90);
-				translate([ht-(m/2)+2,-(perfil/2)-0.5,0])cube([1,perfil+1,20]);
+				translate([ht-(m/2)+2,-(perfil/2)-0.5,0])
+                    cube([1,perfil+1,20]);
 			}
-			translate([-m,-perfil,5.5])cube([ht+4,2*perfil,1.5*perfil]);
+			translate([-m,-perfil,5.5])
+                cube([ht+4,2*perfil,1.5*perfil]);
 		}
 		cylinder(h=15,r=(m/2)+2.5,$fn=90);
 		// base
-		//translate([ht-(m/2),-perfil/2,0])cube([3,perfil,20]);
+		//translate([ht-(m/2),-perfil/2,0])
+            //cube([3,perfil,20]);
 		// slot profile retainer
-		translate([ht-(m/2)+3,-slot/2,0])cube([3,slot,7]);
+		translate([ht-(m/2)+3,-slot/2,0])
+            cube([3,slot,7]);
 		// reinforcements
-		translate([4,-1.5,5])rotate([0,14,0])cube([20,3,5]);
-		translate([23,-8.9,0.5])rotate([0,-20,-5.5])cube([16,3,5]);
-		translate([23,5.9,0.5])rotate([0,-20,5.5])cube([16,3,5]);
+		translate([4,-1.5,5])
+        rotate([0,14,0])
+            cube([20,3,5]);
+		translate([23,-8.9,0.5])
+        rotate([0,-20,-5.5])
+            cube([16,3,5]);
+		translate([23,5.9,0.5])
+        rotate([0,-20,5.5])
+            cube([16,3,5]);
 	}
 	// M8 drill
-	translate([0,0,-5])cylinder(h=50,r=(m/2)+0.2,$fn=90);
+	translate([0,0,-5])
+        cylinder(h=50,r=(m/2)+0.2,$fn=90);
 	// M4 fixing screw drill
-	translate([20,0,14])rotate([0,90,0])cylinder(h=30,r=2.2,$fn=70);
+	translate([20,0,14])
+    rotate([0,90,0])
+        cylinder(h=30,r=2.2,$fn=70);
 	}
 
 }
 
 
 module knob_clamp(altura=11, radio=12, paso=14, metrica=4){
-
+// It fixes the spool clamp pieces to the aluminium profile
 	difference(){
 		union(){
 			cylinder(h=altura/2, r=radio, $fn=radio*10);
@@ -182,8 +199,10 @@ module knob_clamp(altura=11, radio=12, paso=14, metrica=4){
                     cylinder(h=altura/2, r=1.5, $fn=60);
             }
         }
-		translate([0,0,-1])cylinder(h=4, r=4.1, $fn=6);
-		translate([0,0,-3])cylinder(h=altura+10, r=metrica/2, $fn=100);
+		translate([0,0,-1])
+            cylinder(h=4, r=4.1, $fn=6);
+		translate([0,0,-3])
+            cylinder(h=altura+10, r=metrica/2, $fn=100);
 	}
 }
 
@@ -330,7 +349,7 @@ module quarter_handle(lg=50){
 
 
 module half_handle(profile=wslot,lg=50,mt=4){
-// Auxliliar module
+// Auxliliar module, Do NOT print!!
     
 // profile = profile dimensions; 20 = 20x20, 22 = 22x22 and so...
 // lg = handle lenght in mm

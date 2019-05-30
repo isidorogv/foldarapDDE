@@ -1,94 +1,16 @@
+//--------------------------------------------------------
+//  ---- Custom modules for Foldarap DDE 3D printer ----
+//--------------------------------------------------------
+// (c) 2018-2019 Isidoro Gayo Vélez 
+// <isidoro.gayo@gmail.com>
 
+// Credits:
+// -- Enmanuel Gillot, for his superb fodable 3D printer
 
+//---------------------------------------------------------
+// Released under the terms of GNU/GPL v3.0 or higher
+//---------------------------------------------------------
 
-
-module bisel(){
-	difference(){
-		translate([0,-10,0]) cube([10,20,14]);
-		rotate([90,0,0]) translate([10,7,-12]) cylinder(h=25, r=8);
-	}
-}
-
-
-module orejas(){
-
-	difference(){
-		translate([-10,-5.5,0]) cube([10,11,13]);
-
-		translate([-12,0,-0.5]) bisel();
-		translate([-15,-3.5,-1]) cube([20,7,15]);
-		rotate([90,0,0]) translate([-5,6.5,-12]) cylinder(h=25, r=2.5);
-	}
-}
-
-// space = room for wires, maximun should be 11
-module base_enganche(space=9)
-{
-	difference(){
-		union(){
-
-            // paredes laterales
-            translate([0,6,0])cube([13.5,2,13]);
-            translate([0,-8,0])cube([13.5,2,13]);
-    
-            //marcas de enganche
-            rotate([90,0,0])translate([9.5,6.5,-6])cylinder(h=1, r=2);
-            rotate([90,0,0])translate([9.5,6.5,5])cylinder(h=1, r=2);
-		}	
-        translate([14,-10,8])rotate([0,-45,0])cube([15,20,15]);
-	}
-    
-	difference(){
-		translate([0,-6,0])cube([3,12,13]);
-	
-		translate([-10,-3.5,(13-space)/2])cube([20,7,space]);
-	}
-}
-
-
-module cable_chain(){
-
-    base_enganche();
-    orejas();    
-}
-
-
-module orejas02(){
-
-	difference(){
-		union(){	
-			translate([-10,-5.5,0]) cube([10,11,13]);
-			//marcas de enganche
-			#rotate([90,0,0])translate([-5.5,6.5,0]){
-				translate([0,0,-6.25]) cylinder(h=1.25,r=2,$fn=70);
-				translate([0,0,5.25]) cylinder(h=1.25,r=2,$fn=70);
-			}
-		}
-		translate([-12,0,-0.5]) bisel();
-		translate([-15,-3.5,-1]) cube([20,7,15]);
-	}
-}
-
-
-module base_enganche02()
-{
-	difference(){
-		union(){
-			// paredes laterales
-			translate([0,6,0]) cube([13.5,3,13]);
-			translate([0,-9,0]) cube([13.5,3,13]);
-		}
-		// taladro pasante
-		rotate([90,0,0])translate([9,6.5,-12])
-			cylinder(h=25, r=2.5,$fn=70);
-		translate([14,-10,8.5])rotate([0,-45,0])cube([15,20,15]);
-	}
-	//difference(){
-		translate([0,-6,0]) cube([3,12,13]);
-	
-		//translate([-10,-5,4]) cube([20,10,6]);
-	//}
-}
 
 module board_holder(){
 
@@ -132,6 +54,7 @@ module board_holder(){
         }
     }
 }
+
 
 module ovm20lite(){
 
@@ -184,4 +107,117 @@ module board_holder_model(){
     //rotate([0,180,0])
     translate([35,0,0])
         board_holder();
+}
+
+
+module fan_pipe(l=45,isize=8){
+
+// Support for an axial fan (diameter 45 mm)
+// isize = inductive diameter, default for a M8 inductive
+    
+    difference(){
+        union(){
+            // main body
+            difference(){
+                difference(){
+                    cube([14,19,l+5]);
+                
+                    translate([2,2,-5])cube([10,15,1.5*l]);
+                    translate([0,16,l+25])rotate([0,90,0])
+                        cylinder(h=35,r=25,$fn=90);
+                }
+                // fixing slot for axial fan
+                translate([0,0,l-5])difference(){
+                    translate([-2,-3,0])cube([20,25,12]);
+                
+                    translate([1,1,-2])cube([12,17,15]);
+                }
+            }
+            // upper fixing screw
+            translate([0,9.5,l-10])rotate([0,90,0])
+                cylinder(h=14,r=3.5,$fn=80);
+            // inductive holder
+            translate([((isize+4)/2)+14,9.5,0])difference(){
+                union(){
+                    hull(){
+                        translate([-(isize+4)/2,-(isize+4)/2,0])
+                            cube([1,isize+4,10]);
+                        cylinder(h=10,r=(isize+4)/2,$fn=80);
+                    }
+                    translate([isize/2,-2,0])difference(){
+                        // inductive clamp
+                        cube([8,4,10]);
+                    
+                        // M3 drill to get the slot tight
+                        translate([5,10,5])rotate([90,0,0])
+                            cylinder(h=20,r=1.6,$fn=60);
+                        // rounded corners in inductive clamp
+                        translate([3,6,5])rotate([90,0,0])
+                            rounded_corner(lg=10);
+                        translate([3,6,5])rotate([90,90,0])
+                            rounded_corner(lg=10);
+                    }
+                }
+                // internal hole for inductive sensor
+                translate([0,0,-5])
+                    cylinder(h=25,r=(isize/2)+0.1,$fn=60);
+                // adjustement slot
+                translate([0,-0.5,-5])cube([2*isize,1,25]);
+            }
+        }
+        // taladro tornillo fijador superior
+        translate([-5,9.5,l-10])rotate([0,90,0])
+            cylinder(h=30,r=1.6,$fn=80);
+        translate([12,9.5,l-10])rotate([0,90,0])
+            cylinder(h=5,r=3.2,$fn=60);
+        // taladro tornillo fijador inferior...
+        translate([-5,9.5,3.5])rotate([0,90,0])
+            cylinder(h=25,r=1.6,$fn=80);
+        // ...contratuerca...
+        translate([13.5,9.5,3.5])rotate([30,0,0])rotate([0,90,0])
+            cylinder(h=5,r=3.2,$fn=6);
+        // ...y cabeza del tornillo
+        //translate([-2.5,9.5,3.5])rotate([0,90,0])
+        //    cylinder(h=5,r=3.5,$fn=80);
+        // test: plano de corte
+        //color("red")translate([-20,-20,-l/2])cube([60,30,2*l]);
+    }
+}
+
+
+module fan_nozzle(){
+
+    difference(){
+        union(){
+            translate([0,0,1.9])difference(){
+                cube([10,15,7]);
+                translate([1,1,-2])cube([8,13,15]);
+            }
+        // tornillo fijador
+        translate([1,7.5,5.5])rotate([0,90,0])
+            cylinder(h=8,r=2.6,$fn=80);
+        }
+        // taladro tornillo fijador
+        translate([-5,7.5,5.5])rotate([0,90,0])
+            cylinder(h=30,r=1.6,$fn=80);
+    }
+    difference(){
+        //color("grey")
+        hull(){
+            translate([-2,-2,0])difference(){
+                cube([14,19,2]);
+                translate([2,2,-2])cube([10,15,15]);
+            }
+            
+            translate([-18,-2,-16])cube([5,19,1]);
+        }
+        hull(){
+            translate([1,1,1])cube([8,13,1]);
+                  
+            translate([-16.6,1,-16])cube([1,13,1]);
+        }
+        translate([-18,-8,-20])rotate([0,-20,0])cube([5,30,10]);
+        // test: plano de corte
+        //color("crimson")translate([-40,-12,-18])cube([60,20,30]);
+    }
 }

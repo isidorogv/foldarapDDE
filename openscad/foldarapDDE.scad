@@ -29,16 +29,18 @@ thwall=3.5;     // wall thickness
 span=NEMA17;    // span between horizontal profiles on Y axis
 footl=2.5*wslot;// foot lenght
 ease=0.2;       // clearance to fit the aluminum profile easier
-stepper=14;     // type of stepper motor;e.g. 14 = NEMA14, and so...
+stepper=17;     // type of stepper motor;e.g. 14 = NEMA14, and so...
 
 lbearing=24;    // bearing lenght in mm for a 8mm smooth rod
 rbearing=7.5;   // M8 bearing radius in mm
-rrod=4;         // smooth rod radius in mm
+rrod=3;         // smooth rod radius in mm
 drod=130;       // distance between Y rods in mm
-bhole=95.25/2;  // M3 hole distance from bed center
-                // for Miniheatbed, by F. Malpartida
+bhole=100/2;  // M3 hole distance from bed center
+//bhole=95.25/2;  // for Miniheatbed, by F. Malpartida
+
 
 $fn = 50;
+
 
 
 // ******** ---- FoldaRap DDE ----- *********
@@ -47,9 +49,9 @@ $fn = 50;
 
 //translate([wslot+2*thwall+1,-30,-2])
 //rotate([90,0,90])
-    //x_carriage();
+    x_carriage();
     
-x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
+//x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
 
 //translate([-3*thwall-wslot,2*thwall+wslot,0])
     //x_motor_idler();
@@ -73,7 +75,7 @@ rotate([90,0,0])
 //y_motor_idler(bd=20);
 //translate([20,5,0])
 //rotate([90,0,0])
-  //  sync_bearing_holder(thick=18,bd=18);
+    //sync_bearing_holder();
     
 //IEC_plate();
 
@@ -95,8 +97,6 @@ translate([0,-7,-1])
 // you have to print two of these
 //y_bearing_clamp();
 
-
-
 //translate([0,10,0])
   //  foot(lg=footl,mt=4);
 //mirror([0,1,0])
@@ -107,7 +107,8 @@ translate([0,-7,-1])
 // ----- Z axis -----
 
 //translate([0,10,0])
-  //z_motor_holder(mt=4);
+    //z_motor_holder(mt=4);
+//translate([-3*thwall-wslot,2*thwall+wslot+1,0])
 //mirror([0,1,0])
   //  z_motor_holder(mt=4);
 
@@ -145,13 +146,18 @@ translate([0,-7,-1])
 // ----- Miscelaneous -----
 
 //spool_holder();
-//spool_clamp();
+///spool_clamp();
 //knob_clamp(altura=10, radio=5, paso=30);
 //spool_knob(hg=14);
 
 //psu_holder();
 
 //handle();
+
+// board holder only for OVM20 Lite!!
+//rotate([0,180,0])
+  //  board_holder();
+
 
 
 // ******** ---- EoFRDDE ----- *********
