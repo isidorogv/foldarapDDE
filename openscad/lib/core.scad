@@ -11,21 +11,22 @@
 //------------------------------------------------------------------
 
 
-module sync_bearing_holder(thick=13,bd=14){
+module sync_bearing_holder(thick=13,bd=14,hg=8){
     
 // thick = maximun room for synchronic bearing + holder, in mm.
-    
+// bd = bearing diameter in mm
+// hg = holder height in mm
     // main body
     difference(){
         // base preform
-        translate([-4,-4,0])
+        translate([-4,-hg/2,0])
         linear_extrude(height=thick)
         offset(delta=2,chamfer=true)
-            square([bd+2,8]);
+            square([bd+2,hg]);
         
         // room for synchronic bearing
-        translate([-bd/2,-10,(thick+ease-9)/2])
-            cube([bd+1,20,9+ease]);
+        translate([-bd/2,-hg/2-3,(thick-9-ease)/2])
+            cube([bd+1,hg+6,9+ease]);
         // M3 axis drill
         translate([0,0,-1])
             cylinder(h=thick+2,r=1.4);
@@ -39,7 +40,7 @@ module sync_bearing_holder(thick=13,bd=14){
         }
     }
     // fake synchronic bearing
-    %translate([0,0,(thick-9)/2+ease])
+    %translate([0,0,(thick-9)/2])
     union(){
         cylinder(h=1,d=14);
         cylinder(h=9,d=10);

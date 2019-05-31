@@ -49,7 +49,7 @@ $fn = 50;
 
 //translate([wslot+2*thwall+1,-30,-2])
 //rotate([90,0,90])
-    x_carriage();
+    //x_carriage();
     
 //x_motor_holder(hg=NEMA17,stepper=17,thick=6.5);
 
@@ -74,8 +74,8 @@ rotate([90,0,0])
 
 //y_motor_idler(bd=20);
 //translate([20,5,0])
-//rotate([90,0,0])
-    //sync_bearing_holder();
+rotate([90,0,0])
+    sync_bearing_holder(hg=7);
     
 //IEC_plate();
 
