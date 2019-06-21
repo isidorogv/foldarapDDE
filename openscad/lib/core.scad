@@ -16,6 +16,7 @@ module sync_bearing_holder(thick=13,bd=14,hg=8){
 // thick = maximun room for synchronic bearing + holder, in mm.
 // bd = bearing diameter in mm
 // hg = holder height in mm
+
     // main body
     difference(){
         // base preform

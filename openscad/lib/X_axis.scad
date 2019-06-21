@@ -191,7 +191,7 @@ module x_endstop_holder(daxis=32){
                         cylinder(h=10,r=5);
 				}
                 // endstop holder
-                translate([17,daxis/2,0])
+                translate([14,daxis/2,0])
                     cylinder(h=10,r=5);
 			}
 			
@@ -205,10 +205,10 @@ module x_endstop_holder(daxis=32){
 	// room for belt
 	translate([-11.5,-10,-5])
         cube([10,50,20]);
-	translate([-9,5,-5])
+	translate([-12,5,-5])
         cube([20,daxis-10,20]);
 	// M3 drill for screw holder
-	translate([17,daxis/2,-5])
+	translate([14,daxis/2,-5])
             cylinder(h=20,r=1.2);
 	}
 }
@@ -303,7 +303,7 @@ module x_carriage(wbelt=0.8,daxis=32,wd=40,th=15){
                 cylinder(h=15,r=1.2);
         }
         // upper central slot for motor wires
-        translate([wd/2,daxis+24.8,-1])
+        translate([wd/2,daxis+23.5,-1])
             cylinder(h=th+2,d=10);
         // Some rounded corners
         translate([35,daxis+16.1,-10])

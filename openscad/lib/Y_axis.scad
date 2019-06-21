@@ -164,26 +164,70 @@ module y_motor_holder(profile=wslot,stepper=14,thick=5,mt=4){
     NEMA = stepper==14 ? [NEMA14,26,24] : [NEMA17,31,24];
     
     // base
-    motor_plate(thick=thick,
+    /*motor_plate(thick=thick,
                 stepper=stepper,
                 chamcor=false,
-                half=true);
-
+                half=true);*/
+    difference(){
+        hull(){
+            // support for the 1st pulley...
+            translate([NEMA[1]/2+14,3,0])
+                cylinder(h=thick,d=15);
+            // ...and for the second one
+            translate([NEMA[1]/2+6,NEMA[1]/2+6,0])
+                cylinder(h=thick,d=15);
+            // motor plate
+            translate([-NEMA[0]/2,-NEMA[0]/2,0])
+                cube([NEMA[0],NEMA[0],thick]);        
+        }
+        // M3 motor fixing drills
+        for(x=[NEMA[1]/2,-NEMA[1]/2]){
+            for(y=[NEMA[1]/2,-NEMA[1]/2]){
+                // drill for screw
+                translate([x,y,-1])
+                    cylinder(h=thick+2,d=3+ease);
+                // recess for head screw
+                translate([x,y,thwall])
+                    cylinder(h=thick,d=6.5+ease);
+            }
+        }
+        // drills for fixing pulley screw
+        for(pos=[[NEMA[1]/2+14,3,-1],[NEMA[1]/2+6,NEMA[1]/2+6,-1]]){
+            translate(pos){
+                cylinder(h=thick+2,r=1.6);
+                cylinder(h=4,r=3.2,$fn=6);
+            }
+        }
+        // stepper collar recess
+        translate([0,0,-1])
+            cylinder(h=thick+2,d=NEMA[2]);
+    }
     // fixing plate
     translate([-NEMA[0]/2,0,thick/2])
     rotate([0,-90,0])
-        difference(){
-            // main body
-            linear_extrude(height=thwall)
-            offset(delta=2,chamfer=true)
-                square([thick-4,span+2*profile-4],center=true);
-            // fixing drills
-            for(y=[(span+profile)/2,-(span+profile)/2]){
-                translate([0,y,-1])
-                    cylinder(h=thwall+2,d=mt+ease);
-                echo((span+profile)/2);
-            }
+    difference(){
+        // main body
+        linear_extrude(height=thwall)
+        offset(delta=2,chamfer=true)
+            square([thick-4,span+2*profile-4],center=true);
+        // fixing drills
+        for(y=[(span+profile)/2,-(span+profile)/2]){
+            translate([0,y,-1])
+                cylinder(h=thwall+2,d=mt+ease);
+            echo((span+profile)/2);
         }
+    }
+    // fake synchronic bearing
+    for(pos=[[NEMA[1]/2+6,NEMA[1]/2+6,thick],
+            [NEMA[1]/2+14,3,thick]]){
+        %translate(pos)
+        union(){
+            cylinder(h=1,d=14);
+            cylinder(h=9,d=10);
+            translate([0,0,8])
+                cylinder(h=1,d=14);
+        }
+    }
 }
 
 
@@ -214,8 +258,8 @@ module y_motor_idler(profile=wslot,
         }
         // screw heads
         for(y=[vpos/2-profile/2+3,-vpos/2+profile/2-3]){
-            translate([0,y,thwall])
-                cylinder(h=thick+2,r=3.5);
+            translate([0,y,-1])
+                cylinder(h=thick-thwall+1,r=3.5);
         }
         // hollow for saving filament/printing time
         translate([0,-8,-1])
@@ -223,14 +267,14 @@ module y_motor_idler(profile=wslot,
     }
     // side walls
     for(x=[-thwall-9.5+3,9.5-3+ease]){
-        translate([x,vpos/2-20,3*thwall+thick])
+        translate([x,vpos/2-18,3*thwall+thick])
         rotate([0,90,0])
         hull(){
             translate([0,bd/2-3,0])
                 cylinder(h=thwall-ease,r=3);
             translate([0,-bd/2+3,0])
                 cylinder(h=thwall-ease,r=3);
-            translate([3*thwall,-bthick,0])
+            translate([3*thwall,-20.5,0])
                 cube([thwall,2*bthick,thwall-ease]);
         }
     }
@@ -408,7 +452,7 @@ module y_rod_holder(bl=2.5*(rrod+9),bw=wslot,bthick=3,mt=4){
             square([rrod+3,rrod+3],center=true);
         // rod clamp room
         #translate([0,0,-1])
-            cylinder(h=wslot+2,r=rrod);
+            cylinder(h=wslot+2,d=2*rrod+ease);
         translate([-1.5*(rrod+3),rrod/2,-1])
             cube([3*(rrod+3),3*bw,wslot+2]);
     }
@@ -455,49 +499,5 @@ module y_endstop_adj(profile=wslot,hg=50,mt=4){
                 cylinder(h=hg+2,d1=30,d2=60,$fn=4);
         }
     }
-}
-
-
-module y_motor_pulley_holder(thick=5,stepper=14){
-    
-    // Holder for Y belt pulleis    
-    NEMA = stepper==14 ? [NEMA14,26,24] : [NEMA17,31,24];
-    
-    difference(){
-        union(){
-            // support base for first pulley
-            translate([0,0,0])
-            rotate([0,0,180])
-            motor_plate(thick=thick,
-                        stepper=stepper,
-                        half=true,
-                        chamcor=false);    
-            // support for second pulley
-            translate([NEMA[1]/2+10,0,0])
-            hull(){
-                translate([4,3,0])
-                    cylinder(h=thick,d=15);
-                translate([-7,-NEMA[0]/2,0])
-                    cube([1,NEMA[0],thick]);
-            }
-        }
-        // drills for fixing pulley screw
-        translate([NEMA[1]/2+14,3,-1]){
-            cylinder(h=thick+2,r=1.6);
-            cylinder(h=4,r=3.2,$fn=6);
-        }
-    }
-    
-    // fake synchronic bearing
-        for(pos=[[NEMA[1]/2,NEMA[1]/2,5],
-                [NEMA[1]/2+14,3,5]]){
-            %translate(pos)
-            union(){
-                cylinder(h=1,d=14);
-                cylinder(h=9,d=10);
-                translate([0,0,8])
-                    cylinder(h=1,d=14);
-            }
-        }
 }
 

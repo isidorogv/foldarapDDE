@@ -16,7 +16,7 @@ include <lib/X_axis.scad>
 include <lib/Y_axis.scad>
 include <lib/Z_axis.scad>
 include <lib/extruder.scad>
-include <lib/minifolda.scad>
+include <lib/libminifolda.scad>
 
 
 // Parameters to modify. 
@@ -61,8 +61,8 @@ $fn=50;
 
 //extruder_wire_fastener();
 
-//rotate([0,180,0])
-  //  x_wire_fastener();
+rotate([0,180,0])
+    x_wire_fastener();
 
 //x_endstop_holder();
 //knob(thk=4,dia=12,nk=8,dk=3);
@@ -83,8 +83,11 @@ $fn=50;
 
 //mini_board_holder();
 
-//y_motor_holder(thick=14,mt=3);
-
+//mirror()
+  //  y_motor_holder(thick=10,mt=3);
+/*
+%translate([-50,(span+2*wslot-6)/2-wslot/2+3-wslot/2,5])
+cube([100,wslot,wslot]);*/
 //y_motor_idler(mt=3);
 //knob(thk=8,dia=12,nk=8,dk=2.5);
 
@@ -93,7 +96,7 @@ $fn=50;
 
 //y_rod_holder(bl=24,mt=3);
 
-//y_bearing_clamp();
+//y_bearing_clamp(h=18);
 
 //translate([0,0,6])
     //frog();
@@ -102,8 +105,6 @@ $fn=50;
 
 //y_endstop_adj(hg=35,mt=3);
 //knob(thk=4,dia=12,nk=8,dk=3);
-
-//y_motor_pulley_holder();
 
 /*
 difference(){
@@ -146,7 +147,7 @@ translate([0,-5,-1])
 // ==========
 
 //hotend_holder();    
-hotend_holder_collar();
+//hotend_holder_collar();
 
 
 

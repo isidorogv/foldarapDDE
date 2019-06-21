@@ -51,7 +51,7 @@ module z_motor_holder(profile=wslot,
                                     [profile,0]]);
                 // needed for avoiding x carriage 
                 // colission against upper joints
-                translate([thwall+profile,0,0])
+                #translate([thwall+profile,0,0])
                     cube([2*thwall,NEMA+thwall,thick]);
             }
         }
@@ -170,7 +170,7 @@ module z_hinge_outter(profile=wslot,mt=4,bsd=8,ssd=7){
             translate([thwall,-1,thwall])
                 cube([profile+ease,hm+2,profile+ease]);
             // teardrop-shape notch to make printing easier
-            translate([profile/2,profile/2+span,2*thwall+profile])
+            #translate([profile/2,profile/2+span,2*thwall+profile])
             rotate([90,0,0])
                 teardrop(radius=profile,
                                 lenght=2*thwall+2,
