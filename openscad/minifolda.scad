@@ -61,8 +61,8 @@ $fn=50;
 
 //extruder_wire_fastener();
 
-rotate([0,180,0])
-    x_wire_fastener();
+//rotate([0,180,0])
+  //  x_wire_fastener();
 
 //x_endstop_holder();
 //knob(thk=4,dia=12,nk=8,dk=3);
@@ -94,7 +94,7 @@ cube([100,wslot,wslot]);*/
 //rotate([-90,0,0])
   //  sync_bearing_holder();
 
-//y_rod_holder(bl=24,mt=3);
+y_rod_holder(bl=24,mt=3);
 
 //y_bearing_clamp(h=18);
 
