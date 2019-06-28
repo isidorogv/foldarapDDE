@@ -94,7 +94,7 @@ cube([100,wslot,wslot]);*/
 //rotate([-90,0,0])
   //  sync_bearing_holder();
 
-y_rod_holder(bl=24,mt=3);
+//y_rod_holder(bl=24,mt=3);
 
 //y_bearing_clamp(h=18);
 
@@ -146,7 +146,7 @@ translate([0,-5,-1])
 //  Extruder
 // ==========
 
-//hotend_holder();    
+hotend_holder();    
 //hotend_holder_collar();
 
 

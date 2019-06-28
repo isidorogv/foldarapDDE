@@ -388,3 +388,39 @@ module handle(lg=90,mt=4){
         half_handle(lg=lenght,mt=mt);
 }
 
+
+module full_model_extruder(){
+    // Just as reference
+    rotate([90,0,0])
+    union(){
+        %translate([(NEMA17/2)-1,74,57])
+        rotate([0,180,0])
+            hobbed_mk8();
+        %translate([(NEMA17/2)-1,74,35])
+            nema_motor(stepper=17,h=36);
+        
+        x_carriage(dejes=30);
+        
+        color("lightblue")
+        translate([0,0,15])
+            extruder_holder(erods=true);
+        
+        translate([18.5,75,54])
+        rotate([180,0,-85])
+            extruder_idler();
+        
+        color("lightgreen"){
+            extruder();
+        }
+        
+        color("maroon")
+        translate([39,9,59.5])
+        rotate([-90,0,0])
+        union(){    
+            translate([2,0,0])fan_pipe(l=40,isize=8);
+            translate([4,2,-2])fan_nozzle();
+        }
+        translate([16,30,49])
+        import("aux/mylite6.stl");
+    }
+}

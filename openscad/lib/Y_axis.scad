@@ -187,15 +187,15 @@ module y_motor_holder(profile=wslot,stepper=14,thick=5,mt=4){
                 translate([x,y,-1])
                     cylinder(h=thick+2,d=3+ease);
                 // recess for head screw
-                translate([x,y,thwall])
-                    cylinder(h=thick,d=6.5+ease);
+                //translate([x,y,thwall])
+                  //  cylinder(h=thick,d=6.5+ease);
             }
         }
         // drills for fixing pulley screw
         for(pos=[[NEMA[1]/2+14,3,-1],[NEMA[1]/2+6,NEMA[1]/2+6,-1]]){
             translate(pos){
                 cylinder(h=thick+2,r=1.6);
-                cylinder(h=4,r=3.2,$fn=6);
+                //cylinder(h=4,r=3.2,$fn=6);
             }
         }
         // stepper collar recess

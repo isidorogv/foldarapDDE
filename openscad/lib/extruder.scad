@@ -215,14 +215,14 @@ module hotend_holder(){
                 cube([40,46,5]);
             // Contact plane carriage-holder
             translate([0,39,0])
-                cube([40,13,20]);
+                cube([40,13,23]);
             // reinforcement
             translate([0,34,10])
             rotate([0,90,0])
                 rounded_corner(lg=40,rd=5);
         }
         // hotend head room
-        translate([20,39,20])
+        translate([20,39,23])
         rotate([-90,0,0])
         union(){
             translate([0,0,9])
@@ -232,7 +232,7 @@ module hotend_holder(){
             cylinder(h=13,d=12.5+ease);
         }
         // M3 nut holes for hotend
-        translate([20,45.5,16])
+        translate([20,45.5,19])
         for(x=[-15,15]){
             translate([x,0,0])
             union(){
