@@ -1,8 +1,10 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
-FILE_NAME('/home/isidoro/git/foldarap_escalable/z-motor-holder-L.step',
-  '2019-06-22T19:24:07',('Author'),(''),
+FILE_NAME(
+'/home/isidoro/git/foldarap_
+escalable/step/foldarapDDE/z-motor-holder-L-x1.step',
+  '2019-07-05T20:33:56',('Author'),(''),
   'Open CASCADE STEP processor 6.8','FreeCAD','Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN_CC2 { 1 2 10303 214 -1 1 5 4 }'));
 ENDSEC;
@@ -2115,7 +2117,7 @@ SHAPE_REPRESENTATION_RELATIONSHIP() );
 #1768 = ITEM_DEFINED_TRANSFORMATION('','',#11,#15);
 #1769 = PRODUCT_DEFINITION_SHAPE('Placement','Placement of an item',
   #1770);
-#1770 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('2','=>[0:1:1:2]','',#5,#1761,$);
+#1770 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('4','=>[0:1:1:2]','',#5,#1761,$);
 #1771 = PRODUCT_TYPE('part',$,(#1763));
 #1772 = MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION('',(
     #1773),#1754);

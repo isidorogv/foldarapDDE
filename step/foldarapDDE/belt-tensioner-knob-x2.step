@@ -3,9 +3,9 @@ HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
 FILE_NAME(
 '/home/isidoro/git/foldarap_
-escalable/step/foldarapDDE/endstop-knob-x2.step','2019-07-05T20:28:39',(
-    'Author'),(''),'Open CASCADE STEP processor 6.8','FreeCAD','Unknown'
-  );
+escalable/step/foldarapDDE/belt-tensioner-knob-x2.step',
+  '2019-07-05T20:15:36',('Author'),(''),
+  'Open CASCADE STEP processor 6.8','FreeCAD','Unknown');
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN_CC2 { 1 2 10303 214 -1 1 5 4 }'));
 ENDSEC;
 DATA;
@@ -9169,7 +9169,7 @@ GLOBAL_UNIT_ASSIGNED_CONTEXT((#6594,#6595,#6596)) REPRESENTATION_CONTEXT
 #6599 = PRODUCT_DEFINITION_SHAPE('','',#6600);
 #6600 = PRODUCT_DEFINITION('design','',#6601,#6604);
 #6601 = PRODUCT_DEFINITION_FORMATION('','',#6602);
-#6602 = PRODUCT('endstop-knob','endstop-knob','',(#6603));
+#6602 = PRODUCT('knob','knob','',(#6603));
 #6603 = MECHANICAL_CONTEXT('',#2,'mechanical');
 #6604 = PRODUCT_DEFINITION_CONTEXT('part definition',#2,'design');
 #6605 = CONTEXT_DEPENDENT_SHAPE_REPRESENTATION(#6606,#6608);
@@ -9179,7 +9179,7 @@ SHAPE_REPRESENTATION_RELATIONSHIP() );
 #6607 = ITEM_DEFINED_TRANSFORMATION('','',#11,#15);
 #6608 = PRODUCT_DEFINITION_SHAPE('Placement','Placement of an item',
   #6609);
-#6609 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('1','=>[0:1:1:2]','',#5,#6600,$);
+#6609 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('4','=>[0:1:1:2]','',#5,#6600,$);
 #6610 = PRODUCT_TYPE('part',$,(#6602));
 #6611 = MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION('',(
     #6612),#6593);
