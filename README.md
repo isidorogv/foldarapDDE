@@ -2,7 +2,7 @@
 
 **Foldarap Escalable** is a modified version of Foldarap v.1.0 3D printer originally made by [EnmanuelG](https://github.com/EmmanuelG/Foldarap). 
 
-![Foldarap Mod v.1.0](pics/foldarap_mod_v12_byMACasanova.jpg)
+![Foldarap Mod v.1.0](pics/folda-minifolda_01.jpg)
 
 Modification is basically a parametric source file from wich different printer sizes can be built. Check some examples [here](). Openscad files are supplied in order to make your own custom adjustements.
 
