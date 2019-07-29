@@ -35,7 +35,8 @@ lbearing=19;    // bearing lenght in mm
 rbearing=6;     // bearing radius in mm
 rrod=3;         // smooth rod radius in mm
 drod=87;        // distance between Y rods in mm
-bhole=100/2;  // M3 hole distance from bed center
+xbhole=100/2;  // M3 X hole distance from bed center
+ybhole=100/2;  // M3 Y hole distance from bed center
 
 
 $fn=50;
@@ -99,7 +100,7 @@ cube([100,wslot,wslot]);*/
 //y_bearing_clamp(h=18);
 
 //translate([0,0,6])
-    //frog();
+    frog(ad=27);
 
 //PSU_switch_plate();
 
@@ -146,7 +147,7 @@ translate([0,-5,-1])
 //  Extruder
 // ==========
 
-hotend_holder();    
+//hotend_holder();
 //hotend_holder_collar();
 
 

@@ -60,11 +60,13 @@ module PSU_switch_plate(hg=span+2*wslot,wd=50){
         offset(delta=3,chamfer=true)
             square([wd-6,hg-6],center=true);
         // room for power switch
-        translate([-1.5*ws,-ls/2-3,-1])union(){
+        translate([-1.5*ws,-ls/2-3,-1])
+        union(){
             translate([0,3,0])
             linear_extrude(height=thwall+2)
                 square([ws+ease,ls+ease]);            
-            translate([0,0,2])cube([ws+ease,ease+ls+6,thwall]);
+            translate([0,0,2])
+                cube([ws+ease,ease+ls+6,thwall]);
         }
         // drill for power plug
         translate([2.5*rp,0,-1])

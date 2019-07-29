@@ -321,16 +321,20 @@ module y_bearing_clamp(h=14,wd=2*rbearing+6,th=2*lbearing,cham=2){
 }
 
 
-module frog(btk=thwall,ad=27){
+module frog(btk=thwall,ad=ybhole,alpha=1){
 
 // btk = base thickness in mm
 // ad = lower arm distance in mm
+// alpha = multiplier factor
+    
+    // endstop y position
+    ly = 0.9*alpha*((2*lbearing+2)/2);
     
     difference(){
-        frog_base(btk=btk,dist=ad);
+        frog_base(btk=btk,dist=ad,alpha=alpha);
         
         // endstop drills
-            for(y=[((2*lbearing+2)/2)-4,-((2*lbearing+2)/2)+4]){
+            for(y=[ly-4,-ly+4]){
                 translate([12,y,0])
                 for(a=[-9.2/2,9.2/2]){
                     translate([a,0,-1])
@@ -338,8 +342,8 @@ module frog(btk=thwall,ad=27){
                 }
             }
         // hole for fixing screws
-        for(x=[bhole,-bhole]){
-            for(y=[-bhole,bhole]){
+        for(x=[xbhole,-xbhole]){
+            for(y=[-ybhole,ybhole]){
                 translate([x,y,-1])
                     cylinder(h=btk+2,r=1.6);
             }
@@ -354,20 +358,23 @@ module frog(btk=thwall,ad=27){
 }
 
 
-module frog_arm(btk=thwall,dist=27){
+module frog_arm(btk=thwall,dist=ybhole,alpha=1){
 
 // Auxiliar module, NOT for printing!!
     
 // btk = base thickness in mm
 // dist = lower arm distance in mm
+// alpha = multiplier factor
     
-    d = dist > bhole-10 ? bhole-10 : dist;    
+    dx = dist > xbhole-10 ? xbhole-10 : dist;    
 
     // we build right arm, middle support
     // and left arm all in one time
-    for(i=[[[-bhole,bhole,5],thwall,4,[-d,lbearing-4,5],thwall,6],
+    for(i=[[[-xbhole,ybhole,5],thwall,alpha*4,
+            [-dx,lbearing-4,5],thwall,alpha*6],
             
-            [[bhole,bhole,5],thwall,4,[d,lbearing-4,5],thwall,6]]){
+            [[xbhole,ybhole,5],thwall,alpha*4,
+            [dx,lbearing-4,5],thwall,alpha*6]]){
         hull(){
             translate(i[0])
                 cylinder(h=i[1],r=i[2]);
@@ -378,17 +385,18 @@ module frog_arm(btk=thwall,dist=27){
 }
 
 
-module frog_base(rad=3,btk=thwall,dist=27){
+module frog_base(rad=3,btk=thwall,dist=ybhole,alpha=1){
 
 // Auxiliar module, NOT for printing!!
     
     // btk = base thickness in mm
     // rad = roundness radio on corners in mm
+    // alpha = multiplier factor
     
     // frog base width in mm    
     lx = ((drod-2*(rbearing+3))-2*rad)/2;
     // frog base height
-    ly = ((2*lbearing+2)-2*rad)/2;
+    ly = alpha*((2*lbearing+2)-2*rad)/2;
     
     difference(){
         // base
@@ -397,9 +405,9 @@ module frog_base(rad=3,btk=thwall,dist=27){
             offset(r=rad)
                 square([2*lx,2*ly],center=true);
             translate([0,0,-5]){
-                frog_arm(btk=btk,dist=dist);
+                frog_arm(btk=btk,dist=dist,alpha=alpha);
             mirror([0,1,0])
-                frog_arm(btk=btk,dist=dist);
+                frog_arm(btk=btk,dist=dist,alpha=alpha);
             }
         }
         // M3 fixing side slots
@@ -417,7 +425,7 @@ module frog_base(rad=3,btk=thwall,dist=27){
         // holes for saving filament
         for(x=[-lx/2,lx/2]){
             translate([x,0,-5])
-                hollow(lg=3*lx/5);
+                hollow(lg=3*lx/5,wd=ly);
         }
     }
 }

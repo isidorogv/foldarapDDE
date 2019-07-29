@@ -34,9 +34,9 @@ stepper=17;     // type of stepper motor;e.g. 14 = NEMA14, and so...
 lbearing=24;    // bearing lenght in mm for a 8mm smooth rod
 rbearing=7.5;   // M8 bearing radius in mm
 rrod=4;         // smooth rod radius in mm
-drod=130;       // distance between Y rods in mm
-bhole=100;      // M3 hole distance from bed center
-                
+drod=220;       // distance between Y rods in mm
+xbhole=115;      // M3 X hole distance from bed center
+ybhole=70;      // M3 Y hole distance from bed center
 
 
 $fn = 50;
@@ -47,7 +47,7 @@ $fn = 50;
 //      X axis
 // ----------------
 
-x_motor_holder(hg=NEMA17,thick=6.5);
+//x_motor_holder(hg=NEMA17,thick=6.5);
 
 //x_motor_idler();
 
@@ -85,6 +85,7 @@ translate([0,-7,-1])
 }
 */
 
+frog(alpha=1.8);
 
 // ----------------
 //      Z axis
