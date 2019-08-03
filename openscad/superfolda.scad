@@ -85,7 +85,7 @@ translate([0,-7,-1])
 }
 */
 
-frog(alpha=1.8);
+//frog(alpha=1.8);
 
 // ----------------
 //      Z axis
@@ -124,7 +124,7 @@ frog(alpha=1.8);
 
 //spool_holder();
 //spool_clamp();
-//knob_clamp(altura=10, radio=5, paso=30);
+knob_clamp(altura=10, radio=5, paso=30);
 //spool_knob(hg=14);
 
 //handle(lg=100);

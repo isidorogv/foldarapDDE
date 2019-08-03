@@ -192,12 +192,14 @@ module knob_clamp(altura=11, radio=12, paso=14, metrica=4){
 		union(){
 			cylinder(h=altura/2, r=radio, $fn=radio*10);
 			translate([0,0,altura/2])
-				cylinder(h=altura/2, r=0.55*radio, $fn=90);
+				cylinder(h=altura/2,r1=0.75*radio,r2=0.55*radio);
+        
             // Moleteado
             for (ang=[0:paso:360]){
-                rotate([0,0,ang])translate([radio,0,0])
+                rotate([0,0,ang])translate([radio+0.5,0,0])
                     cylinder(h=altura/2, r=1.5, $fn=60);
             }
+            
         }
 		translate([0,0,-1])
             cylinder(h=4, r=4.1, $fn=6);
