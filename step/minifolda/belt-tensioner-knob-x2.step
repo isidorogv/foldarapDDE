@@ -3,9 +3,9 @@ HEADER;
 FILE_DESCRIPTION(('FreeCAD Model'),'2;1');
 FILE_NAME(
 '/home/isidoro/git/foldarap_
-escalable/step/minifolda/belt-tensioner-knob-x2.step',
-  '2019-07-05T20:55:27',('Author'),(''),
-  'Open CASCADE STEP processor 6.8','FreeCAD','Unknown');
+escalable/step/minifolda/y-belt-tensioner-x1.step','2019-07-13T18:12:27'
+  ,('Author'),(''),'Open CASCADE STEP processor 6.8','FreeCAD','Unknown'
+  );
 FILE_SCHEMA(('AUTOMOTIVE_DESIGN_CC2 { 1 2 10303 214 -1 1 5 4 }'));
 ENDSEC;
 DATA;
@@ -9179,7 +9179,7 @@ SHAPE_REPRESENTATION_RELATIONSHIP() );
 #6607 = ITEM_DEFINED_TRANSFORMATION('','',#11,#15);
 #6608 = PRODUCT_DEFINITION_SHAPE('Placement','Placement of an item',
   #6609);
-#6609 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('7','=>[0:1:1:2]','',#5,#6600,$);
+#6609 = NEXT_ASSEMBLY_USAGE_OCCURRENCE('5','=>[0:1:1:2]','',#5,#6600,$);
 #6610 = PRODUCT_TYPE('part',$,(#6602));
 #6611 = MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION('',(
     #6612),#6593);
