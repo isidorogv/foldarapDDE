@@ -1,10 +1,10 @@
 # What's that?
 
-**Foldarap Escalable** is a modified version of Foldarap v.1.0 3D printer originally made by [EnmanuelG](https://github.com/EmmanuelG/Foldarap). 
+**Scalable Foldarap** is a modified version of Foldarap v.1.0 3D printer originally made by [EnmanuelG](https://github.com/EmmanuelG/Foldarap). 
 
 ![Foldarap Mod v.1.0](pics/scalablefolda.jpg)
 
-Modification is basically a parametric source file from wich different printer sizes can be built. Check some examples [here](https://github.com/isidorogv/foldarap_escalable/wiki/Lista-de-Materiales). Openscad files are supplied in order to make your own custom adjustements.
+Modification is basically a parametric source file which different printer sizes can be built from. Check some examples [here](https://github.com/isidorogv/foldarap_escalable/wiki/Lista-de-Materiales). Openscad files are supplied in order to make your own custom adjustements.
 
 Thankx to...
 
@@ -17,7 +17,7 @@ Thankx to...
 * [bipsen](http://www.thingiverse.com/thing:3558349), Case/holder for Fysetc Mini 12864 Display.
 * [Asphyth](https://www.thingiverse.com/thing:2470605), Case for LCD Screen Full Graphic 128x64 multiple stand.
 
-...for their respective works, and to [Clone Wars](https://www.reprap.org/wiki/Proyecto_Clone_Wars) comunity and [3DPrinter Party Stuff](http://www.3dprinterparty.es/) for their support.
+...for their respective works, and to [Clone Wars](https://www.reprap.org/wiki/Proyecto_Clone_Wars) comunity and [3DPrinter Party](http://www.3dprinterparty.es/) people for their support.
 
 Latest version is 2.0. Spanish documentation is going to be uploaded. You can check its [wiki](https://github.com/isidorogv/foldarap_escalable/wiki) if you wanna start build this printer (Only spanish doc available at this moment. English version will be uploaded asap. Please, be patient!).
 
