@@ -21,6 +21,6 @@ Thankx to...
 
 Latest version is 2.0. Spanish documentation is going to be uploaded. You can check its [wiki](https://github.com/isidorogv/foldarap_escalable/wiki) if you wanna start build this printer (Only spanish doc available at this moment. English version will be uploaded asap. Please, be patient!).
 
-
+For the latest news about this development, don't hesitate to contact us on our [Telegram group](t.me/scalable_foldarap).
 
 enjoy!!
