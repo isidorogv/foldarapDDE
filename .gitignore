@@ -1,9 +1,10 @@
+/tmp
 /testing
+/deprecated
 /stl/foldarapDDE/*.png
 /stl/minifolda/*.png
 /stl/superfolda/*.png
 /step/foldarapDDE/*.png
 /step/minifolda/*.png
 /step/superfolda/*.png
-/freecad/*.fcstd1
-/deprecated
+*.fcstd1
