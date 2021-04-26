@@ -4,7 +4,7 @@
 
 ![Foldarap Mod v.1.0](pics/scalablefolda.jpg)
 
-Modification is basically a parametric source file which different printer sizes can be built from. Check some examples [here](https://github.com/isidorogv/foldarap_escalable/wiki/Lista-de-Materiales). Openscad files are supplied in order to make your own custom adjustements.
+Modification is basically a parametric source file which different printer sizes can be built from. Check some examples [here](https://github.com/isidorogv/foldarap_escalable/wiki/Lista-de-Materiales). FreeCad files are supplied in order to make your own custom adjustements.
 
 Thankx to...
 
@@ -19,7 +19,7 @@ Thankx to...
 
 ...for their respective works, and to [Clone Wars](https://www.reprap.org/wiki/Proyecto_Clone_Wars) comunity and [3DPrinter Party](http://www.3dprinterparty.es/) people for their support.
 
-Latest version is 2.0. Spanish documentation is going to be uploaded. You can check its [wiki](https://github.com/isidorogv/foldarap_escalable/wiki) if you wanna start build this printer (Only spanish doc available at this moment. English version will be uploaded asap. Please, be patient!).
+Latest stable version is 2.0. and testing version is 2.4. Spanish documentation is almost fully uploaded. You can check its [wiki](https://github.com/isidorogv/foldarap_escalable/wiki) if you wanna start build this printer (Only spanish doc available at this moment. English version will be uploaded asap. Please, be patient!).
 
 For the latest news about this development, don't hesitate to contact us on our [Telegram group](https://t.me/scalable_foldarap).
 
