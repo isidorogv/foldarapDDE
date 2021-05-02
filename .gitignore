@@ -2,11 +2,8 @@
 /PoC
 /testing
 /deprecated
-/stl/foldarapDDE/*.png
-/stl/minifolda/*.png
-/stl/superfolda/*.png
-/step/foldarapDDE/*.png
-/step/minifolda/*.png
-/step/superfolda/*.png
+/foldaS/*.png
+/foldaM/*.png
+/goldaL/*.png
 *.FCStd1
 *.fcstd1
