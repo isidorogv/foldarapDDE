@@ -2,8 +2,8 @@
 /PoC
 /testing
 /deprecated
-/foldaS/*.png
-/foldaM/*.png
-/goldaL/*.png
+*.png
 *.FCStd1
 *.fcstd1
+*.step/
+*.stl/
