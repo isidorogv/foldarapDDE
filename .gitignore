@@ -3,6 +3,7 @@
 /testing
 /deprecated
 *.png
+*.step
 *.FCStd1
 *.fcstd1
 *step/
