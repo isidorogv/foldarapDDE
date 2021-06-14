@@ -7,5 +7,7 @@
 *.step
 *.FCStd1
 *.fcstd1
+*.step
 *step/
 *stl/
+
