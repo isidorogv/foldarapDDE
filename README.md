@@ -4,7 +4,7 @@
 
 ![Foldarap Mod v.1.0](pics/scalablefolda.jpg)
 
-Modification is, basically, an addon to use a ___direct driver extruder___. Also it is able to fold keeping the display in its position. You can also choose to use ___smooth rods___ or ___linear guides___ for X and Y axis. And finally, it is included the ability to build ___different printer sizes___ just changing the profile lenght. STL and STEP files are supplied in order to make your own custom adjustements.
+Modification is, basically, an addon to use a ___direct drive extruder___. Also it is able to fold keeping the display in its position. You can also choose to use ___smooth rods___ or ___linear guides___ for X and Y axis. And finally, it is included the ability to build ___different printer sizes___ just changing the profile lenght. STL and STEP files are supplied in order to make your own custom adjustements.
 
 Thankx to...
 
