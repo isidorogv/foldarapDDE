@@ -1,5 +1,0 @@
-\babel@toc {spanish}{}
-\contentsline {chapter}{\numberline {1}Introducci\'on}{2}% 
-\contentsline {chapter}{\numberline {2}Conclusiones}{5}% 
-\contentsline {section}{\numberline {2.1}Conclusiones.}{5}% 
-\contentsline {section}{\numberline {2.2}L\IeC {\'\i }neas de trabajo futuras.}{8}% 
