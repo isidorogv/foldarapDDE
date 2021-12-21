@@ -1,8 +1,7 @@
-/20x20/stl/vslot/
-/20x20/freecad/
-/15x15/freecad
-/docs/
-/tmp/
+*/stl/vslot
+*/freecad
+*/docs
+*/tmp
 *.png
 *.FCStd1
 *.fcstd1
