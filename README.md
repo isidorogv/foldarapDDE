@@ -13,12 +13,10 @@ Thankx to...
 * [judetomate](https://www.thingiverse.com/thing:47752), spool holder idea.
 * [Campy3D](https://www.thingiverse.com/thing:2915718), LCD MKS Mini 12864 Mount Enclosure Box.
 * [bipsen](http://www.thingiverse.com/thing:3558349), Case/holder for Fysetc Mini 12864 Display.
-* [JackWaterfall](https://www.thingiverse.com/thing:2023947/files), Prusa Bowden Carriage for smooth rods.
-* [Tom114](https://www.thingiverse.com/thing:1746358), E3D extruder layer fan holder.
 
 ...for their respective works, and to [Clone Wars](https://www.reprap.org/wiki/Proyecto_Clone_Wars) comunity and [3DPrinter Party](http://www.3dprinterparty.es/) people for their support.
 
-Latest stable version is 2.0. and testing version is 3.0. Spanish documentation is almost fully uploaded. You can check its [wiki](https://github.com/isidorogv/foldarap_escalable/wiki) if you wanna start build this printer (Only spanish doc available at this moment. English version will be uploaded asap. Please, be patient!).
+Latest stable version is 2.5. Spanish documentation is on the way.
 
 For the latest news about this development, don't hesitate to contact us on our [Telegram group](https://t.me/scalable_foldarap).
 
